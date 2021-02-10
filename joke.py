@@ -1,5 +1,5 @@
 import requests
-import urllib.request as url 
+import urllib.request as url
 
 def get_joke(word = "Any"):
     link = "https://v2.jokeapi.dev/joke/" + word #joke api
