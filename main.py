@@ -37,6 +37,7 @@ async def on_message(message):
                 joke=jk.get_joke()
                 embed=discord.Embed(description=joke)
                 await message.channel.send(embed=embed)
+
             elif len(msg)==3:
                 if msg[2].upper() in type_of_joke:
                     joke=jk.get_joke(msg[2].upper())
@@ -45,6 +46,7 @@ async def on_message(message):
                 else:
                     embed=discord.Embed(description="Wrong joke type")
                     await message.channel.send(embed=embed)
+
             else:
                 embed = discord.Embed(description="Invalid input")
                 await message.channel.send("Invalid input")
