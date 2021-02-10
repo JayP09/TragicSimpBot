@@ -1,7 +1,7 @@
 import requests
 import urllib.request as url 
 
-def joke(word = "Any"):
+def get_joke(word = "Any"):
     link = "https://v2.jokeapi.dev/joke/" + word #joke api
     print(link)
     try:
