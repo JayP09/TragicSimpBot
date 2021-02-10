@@ -1,5 +1,5 @@
 import discord
-import joke as jk
+from discfactbot import joke as jk
 
 '''
 this discord library revolves around the concept of event.
@@ -33,11 +33,13 @@ async def on_message(message):
         if message.content.startswith('pls'):
             msg= message.content.split(' ')
             if len(msg)==2:
-                joke=jk.get_joke('any')
+                joke=jk.get_joke()
                 embed=discord.Embed(description=joke)
                 await message.channel.send(embed=embed)
-            elif len(msg)==3:
+            elif len(msg) == 3:
+                
                 joke = jk.get_joke(msg[2])
+
                 await message.channel.send(joke)
             else:
                 await message.channel.send("Invalid input")
