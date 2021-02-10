@@ -6,8 +6,3 @@ def joke(word = "Any"):
     print(link)
     return ((requests.get(link)).json())["delivery"]    #return joke
 
-
-def fact():
-
-    fact = (requests.get("https://uselessfacts.jsph.pl/random.json?language=en")).json()['text'] #return fact
-    return fact
