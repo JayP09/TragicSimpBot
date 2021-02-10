@@ -1,5 +1,5 @@
 import discord
-import joke 
+from discfactbot import joke 
 '''
 this discord library revolves around the concept of event.
 event is something you listen to and the respond to event.
