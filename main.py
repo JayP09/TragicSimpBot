@@ -26,6 +26,7 @@ async def on_ready():# this will call when bot is ready to use
 @client.event
 async def on_message(message):
     channels = ["joke-only"]
+    type_of_joke=['PROGRAMMING','MISC','DARK','PUN','SPOOKY','CHRISTMAS']
     if message.author==client.user:
         return None
 
@@ -36,12 +37,18 @@ async def on_message(message):
                 joke=jk.get_joke()
                 embed=discord.Embed(description=joke)
                 await message.channel.send(embed=embed)
-            elif len(msg) == 3:
-                
-                joke = jk.get_joke(msg[2])
 
-                await message.channel.send(joke)
+            elif len(msg)==3:
+                if msg[2].upper() in type_of_joke:
+                    joke=jk.get_joke(msg[2].upper())
+                    embed = discord.Embed(description=joke)
+                    await message.channel.send(embed=embed)
+                else:
+                    embed=discord.Embed(description="Wrong joke type")
+                    await message.channel.send(embed=embed)
+
             else:
+                embed = discord.Embed(description="Invalid input")
                 await message.channel.send("Invalid input")
 
     # print(f"""User : {message.author} tried to do command {message.cont} channel""")
