@@ -1,4 +1,5 @@
 import discord
+import joke as jk
 
 '''
 this discord library revolves around the concept of event.
@@ -11,6 +12,12 @@ callback is function that is called when something else happen
 TOKEN='ODA4Njk1NTQyNTAxNzM2NDc5.YCKSag.ZfYS6EGmD2xHtvN3BwfM9ogjdQE'
 client=discord.Client()
 
+@client.event
+async def on_memeber_join(member):
+    for channel in member.server.channels:
+        if str(channel)=='general':
+            await client.send_message(f"""Welcome to the server {member}""")
+
 @client.event# to register an event
 async def on_ready():# this will call when bot is ready to use
     print('we have logged in as {0.user}'.format(client))
@@ -18,11 +25,24 @@ async def on_ready():# this will call when bot is ready to use
 
 @client.event
 async def on_message(message):
+    channels = ["joke-only"]
     if message.author==client.user:
         return
 
-    if message.content.startswith('pls'):
-        await message.channel.send('Hello!')
+    if message.channel.name in channels:# bot only run command in joke-only channel
+        if message.content.startswith('pls'):
+            msg= message.content.split(' ')
+            if len(msg)==2:
+                joke=jk.get_joke('any')
+                embed=discord.Embed(description=joke)
+                await message.channel.send(embed=embed)
+            elif len(msg)==3:
+                joke = jk.get_joke(msg[2])
+                await message.channel.send(joke)
+            else:
+                await message.channel.send("Invalid input")
+
+    # print(f"""User : {message.author} tried to do command {message.cont} channel""")
 
 
 client.run(TOKEN)
