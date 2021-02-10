@@ -27,7 +27,7 @@ async def on_ready():# this will call when bot is ready to use
 async def on_message(message):
     channels = ["joke-only"]
     if message.author==client.user:
-        return
+        return None
 
     if message.channel.name in channels:# bot only run command in joke-only channel
         if message.content.startswith('pls'):
