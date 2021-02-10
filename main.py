@@ -1,5 +1,5 @@
 import discord
-import joke as jk
+from discfactbot import joke as jk
 
 '''
 this discord library revolves around the concept of event.
@@ -26,6 +26,7 @@ async def on_ready():# this will call when bot is ready to use
 @client.event
 async def on_message(message):
     channels = ["joke-only"]
+    type_of_joke=['PROGRAMMING','MISC','DARK','PUN','SPOOKY','CHRISTMAS']
     if message.author==client.user:
         return
 
@@ -33,13 +34,19 @@ async def on_message(message):
         if message.content.startswith('pls'):
             msg= message.content.split(' ')
             if len(msg)==2:
-                joke=jk.get_joke('any')
+                joke=jk.get_joke()
                 embed=discord.Embed(description=joke)
                 await message.channel.send(embed=embed)
             elif len(msg)==3:
-                joke = jk.get_joke(msg[2])
-                await message.channel.send(joke)
+                if msg[2].upper() in type_of_joke:
+                    joke=jk.get_joke(msg[2].upper())
+                    embed = discord.Embed(description=joke)
+                    await message.channel.send(embed=embed)
+                else:
+                    embed=discord.Embed(description="Wrong joke type")
+                    await message.channel.send(embed=embed)
             else:
+                embed = discord.Embed(description="Invalid input")
                 await message.channel.send("Invalid input")
 
     # print(f"""User : {message.author} tried to do command {message.cont} channel""")
