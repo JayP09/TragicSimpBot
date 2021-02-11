@@ -40,7 +40,11 @@ async def on_message(message):
 
             elif len(msg)==3:
                 if msg[2].upper() in type_of_joke:
-                    joke=jk.get_joke(msg[2].upper())
+                    joke = jk.get_joke(msg[2].upper()) #get joke 
+                    embed = discord.Embed(description=joke)
+                    await message.channel.send(embed=embed)
+                elif msg[2] == 'dadjoke':
+                    joke = jk.get_dad_joke()
                     embed = discord.Embed(description=joke)
                     await message.channel.send(embed=embed)
                 else:
@@ -52,7 +56,5 @@ async def on_message(message):
                 await message.channel.send("Invalid input")
 
     # print(f"""User : {message.author} tried to do command {message.cont} channel""")
-
-
 
 client.run(TOKEN)
