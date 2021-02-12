@@ -1,5 +1,5 @@
 import discord
-from discfactbot import joke as jk
+import joke as jk
 
 '''
 this discord library revolves around the concept of event.
