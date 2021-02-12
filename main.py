@@ -1,5 +1,4 @@
 import discord
-
 from discfactbot import joke as jk
 from discord.ext import commands
 
