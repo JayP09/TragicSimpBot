@@ -1,10 +1,8 @@
 import discord
-<<<<<<< HEAD
-import joke as jk
-=======
+
 from discfactbot import joke as jk
 from discord.ext import commands
->>>>>>> be2a7d2ebc60d13887afe49ff9d752e490a870c9
+
 
 '''
 this discord library revolves around the concept of event.
