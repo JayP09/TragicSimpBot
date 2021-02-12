@@ -1,5 +1,10 @@
 import discord
+<<<<<<< HEAD
 import joke as jk
+=======
+from discfactbot import joke as jk
+from discord.ext import commands
+>>>>>>> be2a7d2ebc60d13887afe49ff9d752e490a870c9
 
 '''
 this discord library revolves around the concept of event.
@@ -10,7 +15,17 @@ discord.py is asynchronous library so things are done with callbacks
 callback is function that is called when something else happen
 '''
 TOKEN='ODA4Njk1NTQyNTAxNzM2NDc5.YCKSag.ZfYS6EGmD2xHtvN3BwfM9ogjdQE'
-client=discord.Client()
+client=commands.Bot(command_prefix="--",help_command=None)
+
+
+
+@client.command(name='Setup')
+async def Setup(message):
+    guild=message.guild
+    channelname="joke-and-fact"
+    embed=discord.Embed(title='Success',description="joke & fact channel has been successfully created.",colour=0xff0000)
+    await guild.create_text_channel(name=channelname)
+    await message.send(embed=embed)
 
 @client.event
 async def on_memeber_join(member):
@@ -25,7 +40,7 @@ async def on_ready():# this will call when bot is ready to use
 
 @client.event
 async def on_message(message):
-    channels = ["joke-only"]
+    channels = ['joke-and-fact']
     type_of_joke=['PROGRAMMING','MISC','DARK','PUN','SPOOKY','CHRISTMAS']
     if message.author==client.user:
         return None
@@ -40,20 +55,28 @@ async def on_message(message):
 
             elif len(msg)==3:
                 if msg[2].upper() in type_of_joke:
-                    joke = jk.get_joke(msg[2].upper()) #get joke 
-                    embed = discord.Embed(description=joke)
+                    joke = jk.get_joke(msg[2].upper())#get joke
+                    embed = discord.Embed(description=joke,colour=0xff0000)
                     await message.channel.send(embed=embed)
                 elif msg[2] == 'dadjoke':
                     joke = jk.get_dad_joke()
-                    embed = discord.Embed(description=joke)
+                    embed = discord.Embed(description=joke,colour=0xff0000)
                     await message.channel.send(embed=embed)
                 else:
                     embed=discord.Embed(description="Wrong joke type")
-                    await message.channel.send(embed=embed)
+                    await message.channel.send(embed=embed,colour=0xff0000)
 
             else:
                 embed = discord.Embed(description="Invalid input")
                 await message.channel.send("Invalid input")
+
+    if message.content.upper()=='--SETUP':
+        channels.append('joke-and-fact')
+        await client.process_commands(message)
+    # if message.content.upper()=='--SETUP':
+    #     name='joke & fact'
+    #     ch=discord.Guild(data=None,state=None)
+    #     channels = await discord.Guild.create_text_channel(name=name)
 
     # print(f"""User : {message.author} tried to do command {message.cont} channel""")
 
