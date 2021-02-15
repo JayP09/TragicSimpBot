@@ -1,6 +1,8 @@
 import discord
 from discfactbot import joke as jk
+from discfactbot import fact as ft
 from discord.ext import commands
+import re
 
 
 '''
@@ -45,36 +47,55 @@ async def on_message(message):
     if message.channel.name in channels:# bot only run command in joke-only channel
         if message.content.startswith('pls'):
             msg= message.content.split(' ')
-            if len(msg)==2:
-                joke=jk.get_joke()
-                embed=discord.Embed(description=joke)
-                await message.channel.send(embed=embed)
-
-            elif len(msg)==3:
-                if msg[2].upper() in type_of_joke:
-                    joke = jk.get_joke(msg[2].upper())#get joke
-                    embed = discord.Embed(description=joke,colour=0xff0000)
+            #code to execute joke
+            if msg[1].upper()=='JOKE':
+                if len(msg) == 2:
+                    joke = jk.get_joke()
+                    embed=discord.Embed(description=joke,colour=0x0000ff)
                     await message.channel.send(embed=embed)
-                elif msg[2] == 'dadjoke':
-                    joke = jk.get_dad_joke()
-                    embed = discord.Embed(description=joke,colour=0xff0000)
+                elif len(msg) == 3:
+                    if msg[2].upper() in type_of_joke:
+                        joke = jk.get_joke(msg[2].upper()) # get joke
+                        embed=discord.Embed(description=joke,colour=0x0000ff)
+                        await message.channel.send(embed=embed)
+                    elif msg[2] == 'dadjoke':
+                        joke = jk.get_dad_joke()
+                        embed = discord.Embed(description=joke, colour=0x0000ff)
+                        await message.channel.send(embed=embed)
+                    else:
+                        embed = discord.Embed(description="Wrong joke type", colour=0x0000ff)
+                        await message.channel.send(embed=embed)
+                else:
+                    embed = discord.Embed(description="Invalid input",colour=0xff0000)
+                    await message.channel.send(embed=embed)
+
+            # code to execute fact
+            if msg[1].upper()=='FACT':
+                if len(msg)==2:
+                    fact=ft.get_fact()
+                    embed=discord.Embed(description=fact,colour=0x00ff00)
+                    await message.channel.send(embed=embed)
+                elif msg[2].upper()=='NUMBER':
+                    n_fact=ft.get_number_fact()
+                    embed=discord.Embed(description=n_fact,colour=0x00ff00)
+                    await message.channel.send(embed=embed)
+                elif msg[2].isdigit():
+                    n_fact=ft.get_number_fact()
+                    embed=discord.Embed(description=n_fact,colour=0x00ff00)
+                    await message.channel.send(embed=embed)
+                elif msg[2].upper()=='YEAR':
+                    n_fact=ft.get_number_fact()
+                    embed=discord.Embed(description=n_fact,colour=0x00ff00)
+                    await message.channel.send(embed=embed)
+                elif re.match(r'\d{2}/\d{2}',msg[2]):
+                    n_fact=ft.get_number_fact()
+                    embed=discord.Embed(description=n_fact,colour=0x00ff00)
                     await message.channel.send(embed=embed)
                 else:
-                    embed=discord.Embed(description="Wrong joke type")
-                    await message.channel.send(embed=embed,colour=0xff0000)
+                    embed=discord.Embed(title='Invalid Input',description="Please try command 'pls fact' for random fact or type 'pls fact number' for random number fact",colour=0xff0000)
+                    await message.channel.send(embed=embed)
 
-            else:
-                embed = discord.Embed(description="Invalid input")
-                await message.channel.send("Invalid input")
+    await client.process_commands(message)
 
-    if message.content.upper()=='--SETUP':
-        channels.append('joke-and-fact')
-        await client.process_commands(message)
-    # if message.content.upper()=='--SETUP':
-    #     name='joke & fact'
-    #     ch=discord.Guild(data=None,state=None)
-    #     channels = await discord.Guild.create_text_channel(name=name)
-
-    # print(f"""User : {message.author} tried to do command {message.cont} channel""")
 
 client.run(TOKEN)
