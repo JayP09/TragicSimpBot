@@ -24,9 +24,11 @@ def get_joke(word = "Any"):
         return setup,error
 
 
+
 def get_dad_joke():
     url = 'https://icanhazdadjoke.com/'
     headers = {'Accept': 'application/json'}
     response = requests.get(url, headers=headers).json()
     joke=response['joke']
     return joke
+
