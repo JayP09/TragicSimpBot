@@ -1,6 +1,6 @@
 import discord
-from discfactbot import joke as jk
-from discfactbot import fact as ft
+import fact as ft
+import joke as jk
 from discord.ext import commands
 import re
 
@@ -81,12 +81,8 @@ async def on_message(message):
                     n_fact=ft.get_number_fact_2(msg[2])
                     embed=discord.Embed(description=n_fact,colour=0x00ff00)
                     await message.channel.send(embed=embed)
-                elif msg[2].upper()=='YEAR':
-                    n_fact=ft.get_number_fact()
-                    embed=discord.Embed(description=n_fact,colour=0x00ff00)
-                    await message.channel.send(embed=embed)
                 elif re.match(r'\d{2}/\d{2}',msg[2]):
-                    n_fact=ft.get_number_fact()
+                    n_fact=ft.get_number_fact_3(msg[2])
                     embed=discord.Embed(description=n_fact,colour=0x00ff00)
                     await message.channel.send(embed=embed)
                 else:
