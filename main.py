@@ -1,9 +1,8 @@
 import discord
-from discfactbot import joke as jk
-from discfactbot import fact as ft
+import fact as ft
+import joke as jk
 from discord.ext import commands
 import re
-
 
 '''
 this discord library revolves around the concept of event.
@@ -15,7 +14,6 @@ callback is function that is called when something else happen
 '''
 TOKEN='ODA4Njk1NTQyNTAxNzM2NDc5.YCKSag.ZfYS6EGmD2xHtvN3BwfM9ogjdQE'
 client=commands.Bot(command_prefix="--",help_command=None)
-
 
 
 @client.command(name='Setup')
@@ -80,15 +78,11 @@ async def on_message(message):
                     embed=discord.Embed(description=n_fact,colour=0x00ff00)
                     await message.channel.send(embed=embed)
                 elif msg[2].isdigit():
-                    n_fact=ft.get_number_fact()
-                    embed=discord.Embed(description=n_fact,colour=0x00ff00)
-                    await message.channel.send(embed=embed)
-                elif msg[2].upper()=='YEAR':
-                    n_fact=ft.get_number_fact()
+                    n_fact=ft.get_number_fact_2(msg[2])
                     embed=discord.Embed(description=n_fact,colour=0x00ff00)
                     await message.channel.send(embed=embed)
                 elif re.match(r'\d{2}/\d{2}',msg[2]):
-                    n_fact=ft.get_number_fact()
+                    n_fact=ft.get_number_fact_3(msg[2])
                     embed=discord.Embed(description=n_fact,colour=0x00ff00)
                     await message.channel.send(embed=embed)
                 else:

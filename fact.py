@@ -9,7 +9,8 @@ def get_fact():
     return fact #return fact in 'str'
 
 def get_number_fact():
-    #facts about number eg:date,year or any random number
+
+    #facts about number 
     list_of_options = ["year","date","trivia"]
     word = random.choice(list_of_options) #randomly select form list
     final_link = "http://numbersapi.com/random/" + word +  "?json" #final link
@@ -17,4 +18,21 @@ def get_number_fact():
     fact = response['text']    #return fact in json data ['text'] to extract fact
     return fact #return fact in 'str'
 
+def get_number_fact_2(number):
+
+    #facts about paticular number
+    list_of_options = ['/math','/trivia']
+    word = random.choice(list_of_options)
+    final_link = "http://numbersapi.com/" + number + word + "?json"
+    response=(requests.get(final_link)).json()
+    fact = response['text']
+    return fact #return fact of number in str
+
+def get_number_fact_3(date):
+
+    #fact about paticular date 
+    final_link = "http://numbersapi.com/" + date + "?json"
+    response=(requests.get(final_link)).json()
+    fact = response['text']
+    return fact
 
