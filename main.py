@@ -1,7 +1,6 @@
 import discord
-from discfactbot import joke as jk
+import joke as jk
 from discord.ext import commands
-
 
 '''
 this discord library revolves around the concept of event.
@@ -13,7 +12,6 @@ callback is function that is called when something else happen
 '''
 TOKEN='ODA4Njk1NTQyNTAxNzM2NDc5.YCKSag.ZfYS6EGmD2xHtvN3BwfM9ogjdQE'
 client=commands.Bot(command_prefix="--",help_command=None)
-
 
 
 @client.command(name='Setup')
@@ -46,9 +44,14 @@ async def on_message(message):
         if message.content.startswith('pls'):
             msg= message.content.split(' ')
             if len(msg)==2:
-                joke=jk.get_joke()
-                embed=discord.Embed(description=joke)
-                await message.channel.send(embed=embed)
+                setup,joke=jk.get_joke()
+                if setup == None:
+                    embed=discord.Embed(description=joke)
+                    await message.channel.send(embed=embed)
+                else:
+                    embed=discord.Embed(description=setup)
+                    embed.add_field(value = joke)   
+                    await message.channel.send(embed=embed)
 
             elif len(msg)==3:
                 if msg[2].upper() in type_of_joke:
