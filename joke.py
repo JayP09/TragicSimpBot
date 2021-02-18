@@ -23,8 +23,6 @@ def get_joke(word = "Any"):
         error='Invalid command please try command "pls joke" for random or try command "pls joke type_of_joke"'
         return setup,error
 
-
-
 def get_dad_joke():
     url = 'https://icanhazdadjoke.com/'
     headers = {'Accept': 'application/json'}
