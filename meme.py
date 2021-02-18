@@ -24,9 +24,9 @@ def meme_file_creator():
                 #i+=1
             #if i == 5:break
     f = open( "listofmemes.txt", "a" )
-    for material in list_of_meme:
-        to_write = material + "\n"
-        f.write( to_write )
+    # for material in list_of_meme:
+    #     to_write = material + "\n"
+    #     f.write( to_write )
 
 meme_file_creator()
 print(list_of_meme)
