@@ -1,4 +1,3 @@
-
 import discord
 import fact as ft
 import joke as jk
