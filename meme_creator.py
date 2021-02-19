@@ -28,7 +28,7 @@ def meme_file_creator():
                 list_of_meme.append([meme_page, memes.title, memes.url])
                 i += 1
             if i == 5: break
-    filename = "discfactbot/memeofweek.csv"
+    filename = "memeofweek.csv"
     # writing to csv file  
     with open(filename, 'w', encoding="utf-8") as csvfile:
         # creating a csv writer object
@@ -36,3 +36,4 @@ def meme_file_creator():
         csvwriter.writerow(field)
         csvwriter.writerows(list_of_meme)
     print('Done')
+
