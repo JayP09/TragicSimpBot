@@ -17,19 +17,19 @@ client = commands.Bot(command_prefix="--", help_command=None)
 
 
 @client.command(name='setup')
-async def setup(message):
+async def setup(message):  # when member type --setup command
     guild = message.guild
     channel_name = "joke-and-fact"
     embed = discord.Embed(
         title='Success',
         description="joke & fact channel has been successfully created.",
         colour=0xff0000)
-    await guild.create_text_channel(name=channel_name)
+    await guild.create_text_channel(name=channel_name)  # create text channel in server 
     await message.send(embed=embed)
 
 
 @client.event
-async def on_member_join(member):
+async def on_member_join(member):  # when member join the server
     for channel in member.server.channels:
         if str(channel) == 'general':
             await client.send_message(f"""Welcome to the server {member}""")
@@ -48,21 +48,21 @@ async def on_message(message):
         return None
 
     if message.channel.name in channels:  # bot only run command in joke-only channel
-        if message.content.startswith('pls'):
+        if message.content.startswith('pls'):  # bot only run when message is start with pls
             msg = message.content.split(' ')
             # code to execute joke
             if msg[1].upper() == 'JOKE':
                 if len(msg) == 2:
                     joke = jk.get_joke()
-                    embed = discord.Embed(description=joke, colour=0x0000ff)
+                    embed = discord.Embed(description=joke, colour=0x0000ff)  # this is used to send embed text to discord
                     await message.channel.send(embed=embed)
                 elif len(msg) == 3:
                     if msg[2].upper() in type_of_joke:
-                        joke = jk.get_joke(msg[2].upper())  # get joke
+                        joke = jk.get_joke(msg[2].upper())  # return random joke
                         embed = discord.Embed(description=joke, colour=0x0000ff)
                         await message.channel.send(embed=embed)
                     elif msg[2] == 'dadjoke':
-                        joke = jk.get_dad_joke()
+                        joke = jk.get_dad_joke()  # return dad joke
                         embed = discord.Embed(description=joke, colour=0x0000ff)
                         await message.channel.send(embed=embed)
                     else:
@@ -75,19 +75,19 @@ async def on_message(message):
             # code to execute fact
             if msg[1].upper() == 'FACT':
                 if len(msg) == 2:
-                    fact = ft.get_fact()
+                    fact = ft.get_fact()  # return random fact
                     embed = discord.Embed(description=fact, colour=0x00ff00)
                     await message.channel.send(embed=embed)
                 elif msg[2].upper() == 'NUMBER':
-                    n_fact = ft.get_random_number_fact()
+                    n_fact = ft.get_random_number_fact()  # return random number fact
                     embed = discord.Embed(description=n_fact, colour=0x00ff00)
                     await message.channel.send(embed=embed)
                 elif msg[2].isdigit():
-                    n_fact = ft.get_number_fact(msg[2])
+                    n_fact = ft.get_number_fact(msg[2])  # return number fact
                     embed = discord.Embed(description=n_fact, colour=0x00ff00)
                     await message.channel.send(embed=embed)
                 elif re.match(r'\d{2}/\d{2}', msg[2]):
-                    n_fact = ft.get_date_fact(msg[2])
+                    n_fact = ft.get_date_fact(msg[2])  # return date fact
                     embed = discord.Embed(description=n_fact, colour=0x00ff00)
                     await message.channel.send(embed=embed)
                 else:
@@ -98,7 +98,9 @@ async def on_message(message):
                         colour=0xff0000)
                     await message.channel.send(embed=embed)
 
-    await client.process_commands(message)
+            # code to execute meme
+
+    await client.process_commands(message)  # code to execute commands
 
 
 client.run(TOKEN)
