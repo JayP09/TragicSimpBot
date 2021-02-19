@@ -1,6 +1,7 @@
 import praw
 import random 
 import re
+import csv
 list_of_meme = []
 
 #reddit 0auth 
@@ -12,6 +13,7 @@ reddit = praw.Reddit( client_id=client_id, client_secret=client_secret, username
 
 def meme_file_creator():
     page_list = [ 'funny', 'dankmemes', 'memes', 'teenagers', 'Chodi', "DsyncTV", 'cursedcomments', 'holdup', 'SaimanSays/', 'wholesomememes' ,'IndianMeyMeys','indiameme','desimemes','Tinder','2meirl4meirl','ComedyCemetery','terriblefacebookmemes']
+    field = ['Number','MemePage','Memetitle','MemeUrl']
     for meme_page in page_list:
         
         memes = reddit.subreddit( meme_page )
@@ -19,14 +21,16 @@ def meme_file_creator():
         i = 0 #counter for selcting 5 memes
         for memes in top_memes:
             if re.search( "^https?://(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:/[^/#?]+)+\.(?:jpg)$", memes.url ):
-                list_of_meme.append((memes.title,memes.url))
-                break
-                #i+=1
-            #if i == 5:break
-    f = open( "listofmemes.txt", "a" )
-    # for material in list_of_meme:
-    #     to_write = material + "\n"
-    #     f.write( to_write )
-
+                list_of_meme.append([i,meme_page,memes.title,memes.url])
+                i+=1
+            if i == 5:break
+    filename = "memeofweek.csv"
+    # writing to csv file  
+    with open(filename, 'w', encoding = "utf-8") as csvfile:  
+    # creating a csv writer object  
+        csvwriter = csv.writer(csvfile)
+        csvwriter.writerow(field)    
+        csvwriter.writerows(list_of_meme)
+    
 meme_file_creator()
 print(list_of_meme)
