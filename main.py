@@ -4,6 +4,7 @@ import joke as jk
 import meme as me
 import random
 from discord.ext import commands
+import time
 import re
 
 '''
@@ -103,15 +104,25 @@ async def on_message(message):
             # code to execute meme
             if msg[1].upper() == 'MEME':
                 if len(msg) == 2:
-                    meme_page, title, url = me.meme_main()
-                    r = random.randint(0, 255)
-                    g = random.randint(0, 255)
-                    b = random.randint(0, 255)
-                    embed = discord.Embed(title=title, url=url, colour=discord.Colour.from_rgb(r, g, b))  # discord.colour return hex colour
-                    embed.set_image(url=url)
-                    text = "r/"+ meme_page
-                    embed.set_footer(text=text)
-                    await message.channel.send(embed=embed)
+                    try:
+                        meme_page, title, url = me.meme_main()
+                        r = random.randint(0, 255)
+                        g = random.randint(0, 255)
+                        b = random.randint(0, 255)
+                        embed = discord.Embed(title=title, url=url, colour=discord.Colour.from_rgb(r, g,
+                                                                                                   b))  # discord.colour return hex colour
+                        embed.set_image(url=url)
+                        text = "r/" + meme_page
+                        embed.set_footer(text=text)
+                        await message.channel.send(embed=embed)
+                    except:
+                        embed = discord.Embed(description='Sleeping for 1 min')
+                        await message.channel.send(embed=embed)
+
+                    # if rows == 1:
+                    #     embed = discord.Embed(description='Sleeping for 1 min')
+                    #     await message.channel.send(embed=embed)
+                    #     time.sleep(60)
                 elif len(msg) == 3:
                     pass
                 else:
