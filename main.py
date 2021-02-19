@@ -56,8 +56,7 @@ async def on_message(message):
             if msg[1].upper() == 'JOKE':
                 if len(msg) == 2:
                     joke = jk.get_joke()
-                    embed = discord.Embed(description=joke,
-                                          colour=0x0000ff)  # this is used to send embed text to discord
+                    embed = discord.Embed(description=joke,colour=0x0000ff)  # this is used to send embed text to discord
                     await message.channel.send(embed=embed)
                 elif len(msg) == 3:
                     if msg[2].upper() in type_of_joke:
@@ -110,12 +109,13 @@ async def on_message(message):
                     b = random.randint(0, 255)
                     embed = discord.Embed(title=title, url=url, colour=discord.Colour.from_rgb(r, g, b))  # discord.colour return hex colour
                     embed.set_image(url=url)
-                    embed.set_footer(text=meme_page)
+                    text = "r/"+ meme_page
+                    embed.set_footer(text=text)
                     await message.channel.send(embed=embed)
                 elif len(msg) == 3:
                     pass
                 else:
-                    print("No meme to send")
+                    print("No meme to send. Try after 1 min")
 
     await client.process_commands(message)  # code to execute commands
 
