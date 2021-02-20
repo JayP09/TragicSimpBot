@@ -109,8 +109,7 @@ async def on_message(message):
                         r = random.randint(0, 255)
                         g = random.randint(0, 255)
                         b = random.randint(0, 255)
-                        embed = discord.Embed(title=title, url=url, colour=discord.Colour.from_rgb(r, g,
-                                                                                                   b))  # discord.colour return hex colour
+                        embed = discord.Embed(title=title, url=url, colour=discord.Colour.from_rgb(r, g,b))  # discord.colour return hex colour
                         embed.set_image(url=url)
                         text = "r/" + meme_page
                         embed.set_footer(text=text)
