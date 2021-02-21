@@ -6,7 +6,7 @@ client = pymongo.MongoClient("mongodb+srv://BeLazy:BeLazy@cluster0.csr3d.mongodb
 db = client["meme"]
 collection = db["memedata"]
 max_count = list(collection.find().sort("count",-1).limit(1))[0]['count'] #get max count
-print(max_count)
+
 def send_meme(x=0):
     total_memes = collection.estimated_document_count() #total_meme
     random_number = random.randint(0,total_memes) #random meme by id 
