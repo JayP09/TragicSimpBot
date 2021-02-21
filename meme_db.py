@@ -11,8 +11,8 @@ def send_meme(x=0):
 
     total_memes = collection.estimated_document_count() #total_meme
     random_number = random.randint(0,total_memes) #random meme by id 
-    x = list(collection.find({"_id":random_number}))#cursor object to list
-    meme_data = x[0] #list ka first element = dict 
+    meme_id = list(collection.find({"_id":random_number}))#cursor object to list
+    meme_data = meme_id[0] #list ka first element = dict 
     if x==0:
         if meme_data['count'] == max_count:
             send_meme(x=1) # just increase the probality of not geting same meme by 1/(totalmeme)**2
