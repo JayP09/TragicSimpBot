@@ -1,7 +1,7 @@
 import discord
 import fact as ft
 import joke as jk
-import meme as me
+import meme_db as me
 import random
 from discord.ext import commands
 import time
@@ -105,7 +105,7 @@ async def on_message(message):
             if msg[1].upper() == 'MEME':
                 if len(msg) == 2:
                     try:
-                        meme_page, title, url = me.meme_main()
+                        meme_page, title, url = me.send_meme()
                         r = random.randint(0, 255)
                         g = random.randint(0, 255)
                         b = random.randint(0, 255)
