@@ -34,4 +34,3 @@ def meme_file_creator():
                 i,j = i+1 , j+1
             if i == 5: break #number of memes per page
     print('done')
-meme_file_creator()
