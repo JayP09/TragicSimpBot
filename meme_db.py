@@ -16,8 +16,10 @@ def send_meme(x=0):
             send_meme(x=1) # just increase the probality of not geting same meme by 1/(totalmeme)**2
         else:
             collection.update_one({ "_id" : random_number },{ "$set" : { "count":meme_data['count']+1 } })#update count
-            return meme_data['memepage'], meme_data['memetitle'], meme_data['memeurl']#return data
+            memepage , memetitle, memeurl = meme_data['memepage'],meme_data['memetitle'] ,meme_data['memeurl']
+            return memepage,memetitle,memeurl #return data
     else:
         collection.update_one({ "_id" : random_number },{ "$set" : { "count":meme_data['count']+1 } })#update count
-        return meme_data['memepage'], meme_data['memetitle'], meme_data['memeurl']#return data
+        memepage, memetitle, memeurl = meme_data['memepage'], meme_data['memetitle'], meme_data['memeurl']
+        return memepage, memetitle, memeurl  # return data
 
