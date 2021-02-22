@@ -3,9 +3,14 @@ import fact as ft
 import joke as jk
 import meme_db as me
 import random
+import server
+from discord import Guild
+from discord.abc import GuildChannel
 from discord.ext import commands
+import server as sr
 import time
 import re
+import levelsys
 
 '''
 this discord library revolves around the concept of event.
@@ -16,19 +21,53 @@ discord.py is asynchronous library so things are done with callbacks
 callback is function that is called when something else happen
 '''
 TOKEN = 'ODA4Njk1NTQyNTAxNzM2NDc5.YCKSag.ZfYS6EGmD2xHtvN3BwfM9ogjdQE'
+cogs = [levelsys]
+roles_meme = ['NoobMemer', 'MemeRular', 'MemeStar', 'AlphaMemer']
 client = commands.Bot(command_prefix="--", help_command=None)
 
 
+for i in range(len(cogs)):
+    cogs[i].setup(client)
+
+
 @client.command(name='setup')
+@commands.has_permissions(manage_roles=True)
 async def setup(message):  # when member type --setup command
     guild = message.guild
     channel_name = "joke-and-fact"
-    embed = discord.Embed(
-        title='Success',
-        description="joke & fact channel has been successfully created.",
-        colour=0xff0000)
-    await guild.create_text_channel(name=channel_name)  # create text channel in server
-    await message.send(embed=embed)
+    text_channel_list, roles_list = sr.get_server_info(guild.name)
+    if channel_name in text_channel_list:
+        embed = discord.Embed(
+            title='Failed',
+            description="joke & fact channel already exist",
+            colour=0xff0000)
+        await message.send(embed=embed)
+    else:
+        await guild.create_text_channel(name=channel_name)  # create text channel in server
+        embed = discord.Embed(
+            title='Success',
+            description="joke & fact channel has been successfully created.",
+            colour=0xff0000)
+        await message.send(embed=embed)
+
+    # to create role for meme
+    for role in roles_meme:
+        if role in roles_list:
+            continue
+        else:
+            await guild.create_role(name=role, colour=discord.Colour.random())
+
+@client.event
+async def on_guild_channel_delete(channel):
+    channel_name = channel.name
+    guild = channel.guild
+    sr.update_server_info(guild.name,channel_name)
+
+@client.event
+async def on_guild_channel_create(channel):
+    channel_name = channel.name
+    guild = channel.guild
+    sr.update_server_info(guild.name,channel_name)
 
 
 @client.event
@@ -41,6 +80,19 @@ async def on_member_join(member):  # when member join the server
 @client.event  # to register an event
 async def on_ready():  # this will call when bot is ready to use
     print('we have logged in as {0.user}'.format(client))
+    for guild in client.guilds:
+        server_name = guild.name
+        channel_guild = guild.text_channels
+        role_guild = guild.roles
+        text_channels_list = []
+        roles_list = []
+        for role in role_guild:
+            roles_list.append(role.name)
+        for channel in channel_guild:
+            text_channels_list.append(channel.name)
+        sr.add_server_info(server_name,text_channels_list,roles_list)
+
+
 
 
 @client.event
@@ -106,22 +158,16 @@ async def on_message(message):
                 if len(msg) == 2:
                     try:
                         meme_page, title, url = me.send_meme()
-                        r = random.randint(0, 255)
-                        g = random.randint(0, 255)
-                        b = random.randint(0, 255)
-                        embed = discord.Embed(title=title, url=url, colour=discord.Colour.from_rgb(r, g,b))  # discord.colour return hex colour
-                        embed.set_image(url=url)
-                        text = "r/" + meme_page
-                        embed.set_footer(text=text)
-                        await message.channel.send(embed=embed)
                     except:
-                        embed = discord.Embed(description='Sleeping for 1 min')
-                        await message.channel.send(embed=embed)
-
-                    # if rows == 1:
-                    #     embed = discord.Embed(description='Sleeping for 1 min')
-                    #     await message.channel.send(embed=embed)
-                    #     time.sleep(60)
+                        meme_page, title, url = me.send_meme()
+                    r = random.randint(0, 255)
+                    g = random.randint(0, 255)
+                    b = random.randint(0, 255)
+                    embed = discord.Embed(title=title, url=url, colour=discord.Colour.from_rgb(r, g,b))  # discord.colour return hex colour
+                    embed.set_image(url=url)
+                    text = "r/" + meme_page
+                    embed.set_footer(text=text)
+                    await message.channel.send(embed=embed)
                 elif len(msg) == 3:
                     pass
                 else:

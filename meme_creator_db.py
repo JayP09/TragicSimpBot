@@ -10,10 +10,10 @@ db = client["meme"]
 collection = db["memedata"]
 post = {}
 # reddit 0auth
-client_id = "OZsROIAyH5bAbA"
-client_secret = 'PhYFLRgpllL3ZPpdIQe3D5yhRWc'
-username = "DK00167"
-password = "98766789"
+client_id = "rhIT7vI1LhIJhw"
+client_secret ='stwGm_NcKbz8FrQr7oVp9BTHfc9Tlg'
+username = "_sorrymybad_"
+password = "Jay@0906"
 reddit = praw.Reddit(client_id=client_id, client_secret=client_secret, username=username, password=password,user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36")
 
 def meme_file_creator():
@@ -34,4 +34,3 @@ def meme_file_creator():
                 i,j = i+1 , j+1
             if i == 5: break #number of memes per page
     print('done')
-meme_file_creator()
