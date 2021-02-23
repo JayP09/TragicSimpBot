@@ -31,7 +31,8 @@ def get_server_info(server_name):  # used to return server info from database
         return text_channel, roles
 
 
-def update_server_info(server_name, channel_name):  # used to update channel list when someone delete channel or create channel
+def update_server_info(server_name,
+                       channel_name):  # used to update channel list when someone delete channel or create channel
     print(server_name)
     print(channel_name)
     data = collection.find_one({"server_name": server_name})
@@ -48,4 +49,4 @@ def update_server_info(server_name, channel_name):  # used to update channel lis
         else:
             text_channels.append(channel_name)
             print(text_channels)
-            collection.update_one({"server_name":server_name},{"$set":{"text_channels":text_channels}})
+            collection.update_one({"server_name": server_name}, {"$set": {"text_channels": text_channels}})
