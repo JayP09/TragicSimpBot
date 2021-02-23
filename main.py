@@ -1,13 +1,15 @@
 import discord
-import fact as ft
-import joke as jk
-import meme_db as me
-import random
-import server
 from discord import Guild
 from discord.abc import GuildChannel
 from discord.ext import commands
+
+import fact as ft
+import joke as jk
+import meme_db as me
+import  motivation as mv
 import server as sr
+
+import random
 import time
 import re
 import levelsys
@@ -91,7 +93,6 @@ async def on_ready():  # this will call when bot is ready to use
         for channel in channel_guild:
             text_channels_list.append(channel.name)
         sr.add_server_info(server_name,text_channels_list,roles_list)
-
 
 
 
