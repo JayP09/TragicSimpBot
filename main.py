@@ -1,16 +1,11 @@
 import discord
-from discord import Guild
-from discord.abc import GuildChannel
 from discord.ext import commands
-
 import fact as ft
 import joke as jk
 import meme_db as me
-import  motivation as mv
+import motivation as mv
 import server as sr
-
 import random
-import time
 import re
 import levelsys
 
@@ -26,7 +21,6 @@ TOKEN = 'ODA4Njk1NTQyNTAxNzM2NDc5.YCKSag.ZfYS6EGmD2xHtvN3BwfM9ogjdQE'
 cogs = [levelsys]
 roles_meme = ['NoobMemer', 'MemeRular', 'MemeStar', 'AlphaMemer']
 client = commands.Bot(command_prefix="--", help_command=None)
-
 
 for i in range(len(cogs)):
     cogs[i].setup(client)
@@ -59,24 +53,26 @@ async def setup(message):  # when member type --setup command
         else:
             await guild.create_role(name=role, colour=discord.Colour.random())
 
+
 @client.event
 async def on_guild_channel_delete(channel):
     channel_name = channel.name
     guild = channel.guild
-    sr.update_server_info(guild.name,channel_name)
+    sr.update_server_info(guild.name, channel_name)
+
 
 @client.event
 async def on_guild_channel_create(channel):
     channel_name = channel.name
     guild = channel.guild
-    sr.update_server_info(guild.name,channel_name)
+    sr.update_server_info(guild.name, channel_name)
 
 
 @client.event
 async def on_member_join(member):  # when member join the server
     for channel in member.server.channels:
         if str(channel) == 'general':
-            await client.send_message(f"""Welcome to the server {member}""")
+            await member.server.channel.send(f"""Welcome to the server {member}""")
 
 
 @client.event  # to register an event
@@ -92,14 +88,21 @@ async def on_ready():  # this will call when bot is ready to use
             roles_list.append(role.name)
         for channel in channel_guild:
             text_channels_list.append(channel.name)
-        sr.add_server_info(server_name,text_channels_list,roles_list)
+        sr.add_server_info(server_name, text_channels_list, roles_list)
 
+
+def colour_generator():
+    r = random.randint(0, 255)
+    g = random.randint(0, 255)
+    b = random.randint(0, 255)
+    return discord.Colour.from_rgb(r, g, b)
 
 
 @client.event
 async def on_message(message):
     channels = ['joke-and-fact']
     type_of_joke = ['PROGRAMMING', 'MISC', 'DARK', 'PUN', 'SPOOKY', 'CHRISTMAS']
+    motivation_Category = ['MOTIVATION', 'inspiration', 'inspire', 'motivational', 'productive']
     if message.author == client.user:
         return None
 
@@ -110,7 +113,8 @@ async def on_message(message):
             if msg[1].upper() == 'JOKE':
                 if len(msg) == 2:
                     joke = jk.get_joke()
-                    embed = discord.Embed(description=joke,colour=0x0000ff)  # this is used to send embed text to discord
+                    embed = discord.Embed(description=joke,
+                                          colour=0x0000ff)  # this is used to send embed text to discord
                     await message.channel.send(embed=embed)
                 elif len(msg) == 3:
                     if msg[2].upper() in type_of_joke:
@@ -161,18 +165,27 @@ async def on_message(message):
                         meme_page, title, url = me.send_meme()
                     except:
                         meme_page, title, url = me.send_meme()
-                    r = random.randint(0, 255)
-                    g = random.randint(0, 255)
-                    b = random.randint(0, 255)
-                    embed = discord.Embed(title=title, url=url, colour=discord.Colour.from_rgb(r, g,b))  # discord.colour return hex colour
+                    embed = discord.Embed(title=title, url=url,
+                                          colour=colour_generator())  # discord.colour return hex colour
                     embed.set_image(url=url)
-                    text = "r/" + meme_page
-                    embed.set_footer(text=text)
+                    embed.set_footer(text="r/"+meme_page)
                     await message.channel.send(embed=embed)
                 elif len(msg) == 3:
                     pass
                 else:
                     print("No meme to send. Try after 1 min")
+
+            if msg[1].upper() == 'MOTIVATION':
+                if len(msg) == 2:
+                    quote, author = mv.quotes_fav()
+                    embed = discord.Embed(description=quote,colour=colour_generator())
+                    embed.set_footer(text="-"+author)
+                elif len(msg) == 3:
+                    if msg[2].upper() in motivation_Category:
+                        pass
+
+
+
 
     await client.process_commands(message)  # code to execute commands
 
