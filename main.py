@@ -210,7 +210,7 @@ async def on_message(message):
                     except:
                         meme_page, title, url = me.send_meme()
                     embed = discord.Embed(title=title, url=url,
-                                          colour=colour_generator())  # discord.colour return hex colour
+                                        colour=colour_generator())  # discord.colour return hex colour
                     embed.set_image(url=url)
                     embed.set_footer(text="r/"+meme_page)
                     await message.channel.send(embed=embed)
