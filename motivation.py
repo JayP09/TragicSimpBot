@@ -49,4 +49,3 @@ def random_quote_fav():
     quote_author = response.json()['quote']['author']
     return quote_random,quote_author
 
-print(random_quote_fav())
