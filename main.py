@@ -77,7 +77,7 @@ async def on_member_join(member):  # when member join the server
 
 
 @client.event
-async def on_memeber_join(self,member):
+async def on_memeber_join(self, member):
     pass
 
 
@@ -119,7 +119,8 @@ async def on_message(message):
             if msg[1].upper() == 'JOKE':
                 if len(msg) == 2:
                     joke = jk.get_joke()
-                    embed = discord.Embed(description=joke,colour=0x0000ff)  # this is used to send embed text to discord
+                    embed = discord.Embed(description=joke,
+                                          colour=0x0000ff)  # this is used to send embed text to discord
                     await message.channel.send(embed=embed)
                 elif len(msg) == 3:
                     if msg[2].upper() in type_of_joke:
@@ -146,52 +147,42 @@ async def on_message(message):
                     await message.channel.send(embed=embed)
                 elif msg[2].upper() == 'NUMBER':
                     n_fact = ft.get_random_number_fact()  # return random number fact
-                    time.sleep(0.5)
                     embed = discord.Embed(description=n_fact, colour=0x00ff00)
                     await message.channel.send(embed=embed)
                 elif msg[2].isdigit():
                     n_fact = ft.get_number_fact(msg[2])  # return number fact
-                    time.sleep(0.5)
                     embed = discord.Embed(description=n_fact, colour=0x00ff00)
                     await message.channel.send(embed=embed)
                 elif re.match(r'\d{2}/\d{2}', msg[2]):
                     n_fact = ft.get_date_fact(msg[2])  # return date fact
-                    time.sleep(0.5)
                     embed = discord.Embed(description=n_fact, colour=0x00ff00)
                     await message.channel.send(embed=embed)
-                elif msg[2].upper()=='ANIMALS':
-                    animals_fact = ft.animals_fact()
-                    time.sleep(0.5)
+                elif msg[2].upper() == 'ANIMALS':  # return random animals fact
+                    animals_fact = ft.get_animals_fact()
                     embed = discord.Embed(description=animals_fact, colour=0x00ff00)
                     await message.channel.send(embed=embed)
-                elif msg[2].upper()=='DOG':
-                    animals_fact = ft.get_animal_fact(msg[2])
-                    time.sleep(0.5)
+                elif msg[2].upper() == 'DOG':  # return dog fact
+                    animals_fact = ft.animal_fact(msg[2])
                     embed = discord.Embed(description=animals_fact, colour=0x00ff00)
                     await message.channel.send(embed=embed)
-                elif msg[2].upper()=='CAT':
-                    animals_fact = ft.get_animals_fact(msg[2])
-                    time.sleep(0.5)
+                elif msg[2].upper() == 'CAT':  # return cat fact
+                    animals_fact = ft.animal_fact(msg[2])
                     embed = discord.Embed(description=animals_fact, colour=0x00ff00)
                     await message.channel.send(embed=embed)
-                elif msg[2].upper()=='PANDA':
-                    animals_fact = ft.get_animals_fact(msg[2])
-                    time.sleep(0.5)
+                elif msg[2].upper() == 'PANDA':  # return panda fact
+                    animals_fact = ft.animal_fact(msg[2])
                     embed = discord.Embed(description=animals_fact, colour=0x00ff00)
                     await message.channel.send(embed=embed)
-                elif msg[2].upper()=='FOX':
-                    animals_fact = ft.get_animals_fact(msg[2])
-                    time.sleep(0.5)
+                elif msg[2].upper() == 'FOX':  # return fox fact
+                    animals_fact = ft.animal_fact(msg[2])
                     embed = discord.Embed(description=animals_fact, colour=0x00ff00)
                     await message.channel.send(embed=embed)
-                elif msg[2].upper()=='BIRD':
-                    animals_fact = ft.get_animals_fact(msg[2])
-                    time.sleep(0.5)
+                elif msg[2].upper() == 'BIRD':  # return bird fact
+                    animals_fact = ft.animal_fact(msg[2])
                     embed = discord.Embed(description=animals_fact, colour=0x00ff00)
                     await message.channel.send(embed=embed)
-                elif msg[2].upper()=='KOALA':
-                    animals_fact = ft.get_animals_fact(msg[2])
-                    time.sleep(0.5)
+                elif msg[2].upper() == 'KOALA':  # return koala fact
+                    animals_fact = ft.animal_fact(msg[2])
                     embed = discord.Embed(description=animals_fact, colour=0x00ff00)
                     await message.channel.send(embed=embed)
                 else:
@@ -210,9 +201,9 @@ async def on_message(message):
                     except:
                         meme_page, title, url = me.send_meme()
                     embed = discord.Embed(title=title, url=url,
-                                        colour=colour_generator())  # discord.colour return hex colour
+                                          colour=colour_generator())  # discord.colour return hex colour
                     embed.set_image(url=url)
-                    embed.set_footer(text="r/"+meme_page)
+                    embed.set_footer(text="r/" + meme_page)
                     await message.channel.send(embed=embed)
                 elif len(msg) == 3:
                     pass
@@ -222,14 +213,19 @@ async def on_message(message):
             if msg[1].upper() == 'MOTIVATION':
                 if len(msg) == 2:
                     quote, author = mv.quotes_fav()
-                    embed = discord.Embed(description=quote,colour=colour_generator())
-                    embed.set_footer(text="-"+author)
+                    embed = discord.Embed(description=quote, colour=colour_generator())
+                    embed.set_footer(text="-" + author)
                 elif len(msg) == 3:
                     if msg[2].upper() in motivation_Category:
+                        quote,author =mv.quotes_fav()
+                        embed = discord.Embed(description=quote, colour=colour_generator())
+                        embed.set_footer(text="-"+author)
+                    elif msg[2].upper() == "QOTD":
+                        quote,author = mv.random_quote_fav()
+                        embed = discord.Embed(description=quote, colour=colour_generator())
+                        embed.set_footer(text="-" + author)
+                    else:
                         pass
-
-
-
 
     await client.process_commands(message)  # code to execute commands
 
