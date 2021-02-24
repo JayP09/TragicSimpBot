@@ -26,7 +26,7 @@ def meme_file_creator():
     for meme_page in page_list:
         memes = reddit.subreddit(meme_page)
         top_memes = memes.top('week')
-        i = 0  # counter for selcting 5 memes
+        i = 0  # counter for selecting 5 memes
         for memes in top_memes:
             if re.search("^https?://(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:/[^/#?]+)+\.(?:jpg)$", memes.url):
                 post = {"_id": j, "memepage": meme_page, "memetitle": memes.title, "memeurl": memes.url, "count": 0}
