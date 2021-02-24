@@ -1,3 +1,4 @@
+from threading import current_thread
 import discord
 from discord.ext import commands
 from pymongo import MongoClient
@@ -60,7 +61,7 @@ class LevelSys(commands.Cog):
                         level+=1
                         levelling.update_one({"user_id": message.author.id}, {"$set": {"current_xp":current_xp, "level": level}})
                     current_xp,user_level = user_level_info(current_xp,xp,level)
-                    levelling.update_one({"user_id": message.author.id}, {"$set": {"xp": xp, "level": user_level}})
+                    levelling.update_one({"user_id": message.author.id}, {"$set": {"current_xp":current_xp ,"xp": xp, "level": user_level}})
                     print(user_level)
                     if stats['level'] >= user_level:
                         print(user_level, "level not updated")
