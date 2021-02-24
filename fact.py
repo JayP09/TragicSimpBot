@@ -36,7 +36,7 @@ def get_date_fact(date):
     fact = response['text']
     return fact
 
-def get_animals_fact():
+def animals_fact():
     list_of_option = ['/dogs','/cat','/panda','/fox','/bird','/koala']
     random_fact= random.choice(list_of_option)
     final_link = "https://some-random-api.ml/facts"+random_fact
@@ -44,7 +44,7 @@ def get_animals_fact():
     fact = response['fact']
     return fact
 
-def animal_fact(data):
+def get_animal_fact(data):
     final_link = "https://some-random-api.ml/facts/"+data
     response = (requests.get(final_link)).json()
     fact = response['fact']

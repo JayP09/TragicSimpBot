@@ -13,15 +13,13 @@ db = client["meme"]
 levelling = db["levelling"]
 
 
-def user_level_info(xp):
-    temp = 100
-    i = 0
-    while True:
-        if 0 < xp <= temp:
-            return i
-        temp = temp + 100
-        i = i + 1
-
+def user_level_info(current_xp,xp,level):
+    if current_xp > level*100:
+        current_xp = current_xp-level*100
+        level+=1
+        return current_xp,level
+    else:
+        return current_xp,level
 
 def colour_generator():
     r = random.randint(0, 255)
@@ -50,11 +48,18 @@ class LevelSys(commands.Cog):
             stats = levelling.find_one({"user_id": message.author.id})
             if not message.author.bot:
                 if stats is None:
-                    newuser = {"user_id": message.author.id, "username": message.author.name, "xp": 0, "level": 0}
+                    newuser = {"user_id": message.author.id, "username": message.author.name, "xp":0,"current_xp": 0, "level": 1}
                     levelling.insert_one(newuser)
                 else:
+                    current_xp = stats['current_xp']
+                    level = stats["level"]
                     xp = stats["xp"] + 10
-                    user_level = user_level_info(xp)
+                    current_xp += 10
+                    if current_xp > level*100:
+                        current_xp = current_xp-level*100
+                        level+=1
+                        levelling.update_one({"user_id": message.author.id}, {"$set": {"current_xp":current_xp, "level": level}})
+                    current_xp,user_level = user_level_info(current_xp,xp,level)
                     levelling.update_one({"user_id": message.author.id}, {"$set": {"xp": xp, "level": user_level}})
                     print(user_level)
                     if stats['level'] >= user_level:
@@ -80,8 +85,7 @@ class LevelSys(commands.Cog):
         if ctx.channel.name == bot_channel:
             stats = levelling.find_one({"user_id": ctx.author.id})
             if stats is None:
-                embed = discord.Embed(description="You haven't sent any messages, no rank!!!",
-                                      colour=colour_generator())
+                embed = discord.Embed(description="You haven't sent any messages, no rank!!!",colour=colour_generator())
                 await ctx.channel.send(embed=embed)
             else:
                 xp = stats["xp"]

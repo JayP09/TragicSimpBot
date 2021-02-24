@@ -119,8 +119,7 @@ async def on_message(message):
             if msg[1].upper() == 'JOKE':
                 if len(msg) == 2:
                     joke = jk.get_joke()
-                    embed = discord.Embed(description=joke,
-                                          colour=0x0000ff)  # this is used to send embed text to discord
+                    embed = discord.Embed(description=joke,colour=0x0000ff)  # this is used to send embed text to discord
                     await message.channel.send(embed=embed)
                 elif len(msg) == 3:
                     if msg[2].upper() in type_of_joke:
@@ -142,31 +141,31 @@ async def on_message(message):
             if msg[1].upper() == 'FACT':
                 if len(msg) == 2:
                     fact = ft.get_fact()  # return random fact
-                    time.sleep(5)
+                    time.sleep(0.5)
                     embed = discord.Embed(description=fact, colour=0x00ff00)
                     await message.channel.send(embed=embed)
                 elif msg[2].upper() == 'NUMBER':
                     n_fact = ft.get_random_number_fact()  # return random number fact
-                    time.sleep(5)
+                    time.sleep(0.5)
                     embed = discord.Embed(description=n_fact, colour=0x00ff00)
                     await message.channel.send(embed=embed)
                 elif msg[2].isdigit():
                     n_fact = ft.get_number_fact(msg[2])  # return number fact
-                    time.sleep(5)
+                    time.sleep(0.5)
                     embed = discord.Embed(description=n_fact, colour=0x00ff00)
                     await message.channel.send(embed=embed)
                 elif re.match(r'\d{2}/\d{2}', msg[2]):
                     n_fact = ft.get_date_fact(msg[2])  # return date fact
-                    time.sleep(5)
+                    time.sleep(0.5)
                     embed = discord.Embed(description=n_fact, colour=0x00ff00)
                     await message.channel.send(embed=embed)
                 elif msg[2].upper()=='ANIMALS':
-                    animals_fact = ft.get_animals_fact()
+                    animals_fact = ft.animals_fact()
                     time.sleep(0.5)
                     embed = discord.Embed(description=animals_fact, colour=0x00ff00)
                     await message.channel.send(embed=embed)
                 elif msg[2].upper()=='DOG':
-                    animals_fact = ft.animal_fact(msg[2])
+                    animals_fact = ft.get_animal_fact(msg[2])
                     time.sleep(0.5)
                     embed = discord.Embed(description=animals_fact, colour=0x00ff00)
                     await message.channel.send(embed=embed)
