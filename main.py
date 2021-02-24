@@ -5,6 +5,7 @@ import joke as jk
 import meme_db as me
 import motivation as mv
 import server as sr
+import time
 import random
 import re
 import levelsys
@@ -75,6 +76,11 @@ async def on_member_join(member):  # when member join the server
             await member.server.channel.send(f"""Welcome to the server {member}""")
 
 
+@client.event
+async def on_memeber_join(self,member):
+    pass
+
+
 @client.event  # to register an event
 async def on_ready():  # this will call when bot is ready to use
     print('we have logged in as {0.user}'.format(client))
@@ -136,19 +142,58 @@ async def on_message(message):
             if msg[1].upper() == 'FACT':
                 if len(msg) == 2:
                     fact = ft.get_fact()  # return random fact
+                    time.sleep(5)
                     embed = discord.Embed(description=fact, colour=0x00ff00)
                     await message.channel.send(embed=embed)
                 elif msg[2].upper() == 'NUMBER':
                     n_fact = ft.get_random_number_fact()  # return random number fact
+                    time.sleep(5)
                     embed = discord.Embed(description=n_fact, colour=0x00ff00)
                     await message.channel.send(embed=embed)
                 elif msg[2].isdigit():
                     n_fact = ft.get_number_fact(msg[2])  # return number fact
+                    time.sleep(5)
                     embed = discord.Embed(description=n_fact, colour=0x00ff00)
                     await message.channel.send(embed=embed)
                 elif re.match(r'\d{2}/\d{2}', msg[2]):
                     n_fact = ft.get_date_fact(msg[2])  # return date fact
+                    time.sleep(5)
                     embed = discord.Embed(description=n_fact, colour=0x00ff00)
+                    await message.channel.send(embed=embed)
+                elif msg[2].upper()=='ANIMALS':
+                    animals_fact = ft.get_animals_fact()
+                    time.sleep(0.5)
+                    embed = discord.Embed(description=animals_fact, colour=0x00ff00)
+                    await message.channel.send(embed=embed)
+                elif msg[2].upper()=='DOG':
+                    animals_fact = ft.animal_fact(msg[2])
+                    time.sleep(0.5)
+                    embed = discord.Embed(description=animals_fact, colour=0x00ff00)
+                    await message.channel.send(embed=embed)
+                elif msg[2].upper()=='CAT':
+                    animals_fact = ft.get_animals_fact(msg[2])
+                    time.sleep(0.5)
+                    embed = discord.Embed(description=animals_fact, colour=0x00ff00)
+                    await message.channel.send(embed=embed)
+                elif msg[2].upper()=='PANDA':
+                    animals_fact = ft.get_animals_fact(msg[2])
+                    time.sleep(0.5)
+                    embed = discord.Embed(description=animals_fact, colour=0x00ff00)
+                    await message.channel.send(embed=embed)
+                elif msg[2].upper()=='FOX':
+                    animals_fact = ft.get_animals_fact(msg[2])
+                    time.sleep(0.5)
+                    embed = discord.Embed(description=animals_fact, colour=0x00ff00)
+                    await message.channel.send(embed=embed)
+                elif msg[2].upper()=='BIRD':
+                    animals_fact = ft.get_animals_fact(msg[2])
+                    time.sleep(0.5)
+                    embed = discord.Embed(description=animals_fact, colour=0x00ff00)
+                    await message.channel.send(embed=embed)
+                elif msg[2].upper()=='KOALA':
+                    animals_fact = ft.get_animals_fact(msg[2])
+                    time.sleep(0.5)
+                    embed = discord.Embed(description=animals_fact, colour=0x00ff00)
                     await message.channel.send(embed=embed)
                 else:
                     embed = discord.Embed(
