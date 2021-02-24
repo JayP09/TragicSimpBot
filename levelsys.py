@@ -1,4 +1,3 @@
-from threading import current_thread
 import discord
 from discord.ext import commands
 from pymongo import MongoClient
@@ -9,20 +8,21 @@ level = ['NoobMemer', 'MemeRular', 'MemeStar', 'AlphaMemer']
 levelnum = [5, 10, 15, 20]
 
 client = MongoClient(
-    "mongodb+srv://BeLazy:BeLazy@cluster0.csr3d.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    "mongodb+srv://BeLazy:BeLazy@cluster0.csr3d.mongodb.net/myFirstDatabase?retryWrites=true&w=majority") # to connect mongodb server
 db = client["meme"]
 levelling = db["levelling"]
 
 
-def user_level_info(current_xp,xp,level):
-    if current_xp > level*100:
-        current_xp = current_xp-level*100
-        level+=1
-        return current_xp,level
+def user_level_info(current_xp, lvl):
+    if current_xp > lvl * 100:
+        current_xp = current_xp - lvl * 100
+        lvl += 1
+        return current_xp, lvl
     else:
-        return current_xp,level
+        return current_xp, lvl
 
-def colour_generator():
+
+def colour_generator():  # return random generated colour
     r = random.randint(0, 255)
     g = random.randint(0, 255)
     b = random.randint(0, 255)
@@ -49,21 +49,24 @@ class LevelSys(commands.Cog):
             stats = levelling.find_one({"user_id": message.author.id})
             if not message.author.bot:
                 if stats is None:
-                    newuser = {"user_id": message.author.id, "username": message.author.name, "xp":0,"current_xp": 0, "level": 1}
-                    levelling.insert_one(newuser)
+                    newuser = {"user_id": message.author.id, "username": message.author.name, "xp": 0, "current_xp": 0,
+                               "level": 1}
+                    levelling.insert_one(newuser)  # insert user in database
                 else:
                     current_xp = stats['current_xp']
-                    level = stats["level"]
-                    xp = stats["xp"] + 10
-                    current_xp += 10
-                    if current_xp > level*100:
-                        current_xp = current_xp-level*100
-                        level+=1
-                        levelling.update_one({"user_id": message.author.id}, {"$set": {"current_xp":current_xp, "level": level}})
-                    current_xp,user_level = user_level_info(current_xp,xp,level)
-                    levelling.update_one({"user_id": message.author.id}, {"$set": {"current_xp":current_xp ,"xp": xp, "level": user_level}})
+                    lvl = stats["level"]
+                    xp = stats["xp"] + 20
+                    current_xp += 20
+                    # if current_xp > level * 100:
+                    #     current_xp = current_xp - level * 100
+                    #     level += 1
+                    #     levelling.update_one({"user_id": message.author.id},
+                    #                          {"$set": {"current_xp": current_xp, "level": level}})
+                    cur_xp, user_level = user_level_info(current_xp, lvl)
+                    levelling.update_one({"user_id": message.author.id},
+                                         {"$set": {"current_xp": cur_xp, "xp": xp, "level": user_level}})  # update data in mongodb database
                     print(user_level)
-                    if stats['level'] >= user_level:
+                    if lvl >= user_level:
                         print(user_level, "level not updated")
                     else:
                         print(user_level, "inside else")
@@ -78,22 +81,23 @@ class LevelSys(commands.Cog):
                                     discord.utils.get(message.author.guild.roles, name=level[i]))
                                 embed = discord.Embed(
                                     description=f"{message.author.mention} you have gotten role **{level[i]}**!!!")
-                                embed.set_thumbnail(url=message.authr.avatar_url)
+                                embed.set_thumbnail(url=message.author.avatar_url)  # assign role to user
                                 await message.channel.send(embed=embed)
 
     @commands.command()
-    async def rank(self, ctx):
+    async def rank(self, ctx):  # give rank of user
         if ctx.channel.name == bot_channel:
             stats = levelling.find_one({"user_id": ctx.author.id})
             if stats is None:
-                embed = discord.Embed(description="You haven't sent any messages, no rank!!!",colour=colour_generator())
+                embed = discord.Embed(description="You haven't sent any messages, no rank!!!",
+                                      colour=colour_generator())
                 await ctx.channel.send(embed=embed)
             else:
                 xp = stats["xp"]
-                lvl = user_level_info(xp)
+                lvl = stats['level']
                 rank = 0
                 boxes = int((xp / (100 * (lvl + 1)) * 10))
-                rankings = levelling.find().sort("xp", -1)
+                rankings = levelling.find().sort("xp", -1) # to sort the database
                 for x in rankings:
                     rank += 1
                     if stats["user_id"] == x["user_id"]:
@@ -104,11 +108,11 @@ class LevelSys(commands.Cog):
                 embed.add_field(name="Rank", value=f"{rank}/{ctx.guild.member_count}", inline=True)
                 embed.add_field(name="Progress Bar [lvl]",
                                 value=boxes * ":blue_square:" + (20 - boxes) * ":white_large_square:", inline=True)
-                embed.set_thumbnail(url=ctx.author.avatar_url)
+                embed.set_thumbnail(url=ctx.author.avatar_url)  # used to get user avatar
                 await ctx.channel.send(embed=embed)
 
     @commands.command()
-    async def leaderboard(self, ctx):
+    async def leaderboard(self, ctx):  # generate leaderboard
         if ctx.channel.name == bot_channel:
             rankings = levelling.find().sort("xp", -1)
             i = 1
