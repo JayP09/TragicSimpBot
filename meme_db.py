@@ -1,7 +1,7 @@
 import random
 import pymongo
-from pymongo import MongoClient
-import json
+
+
 client = pymongo.MongoClient("mongodb+srv://BeLazy:BeLazy@cluster0.csr3d.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 db = client["meme"]
 collection = db["memedata"]
