@@ -18,8 +18,10 @@ def update_db(quote, author, oneCat=None):
         post = {"_id": id_value + 1, "quote": quote, "author": author, "Category": oneCat, "up": 0, "down": 0,
                 "count": 1}
         collection.insert_one(post)
+        return quote, author
     else:
         collection.update_one({"_id": status['_id']}, {"$set": {"count": status['count'] + 1}})
+        return quote, author
 
 
 def quotes_fav(oneCat=None):
@@ -42,15 +44,15 @@ def quotes_fav(oneCat=None):
     else:
         return 'failed', 'invalid category'
 
+
 def random_quote_fav():
     """
     Fetches quote of the Day
     returns a quote and author
     """
-    response = requests.get('https://favqs.com/api/qotd',verify=False)
+    response = requests.get('https://favqs.com/api/qotd', verify=False)
     print(response.json())
     quote_random = response.json()['quote']['body']
     quote_author = response.json()['quote']['author']
-    update_db(quote_random,quote_author)
-    return quote_random,quote_author
-
+    quote, author = update_db(quote_random, quote_author)
+    return quote_random, quote_author
