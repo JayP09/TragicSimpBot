@@ -18,8 +18,8 @@ def send_meme(x=0):
         else:
             collection.update_one({"_id": random_number}, {"$set": {"count": meme_data['count'] + 1}})  # update count
             memepage, memetitle, memeurl = meme_data['memepage'], meme_data['memetitle'], meme_data['memeurl']
-            return memepage, memetitle, memeurl  # return data
+            return memepage, memetitle, memeurl  # return Resources
     else:
         collection.update_one({"_id": random_number}, {"$set": {"count": meme_data['count'] + 1}})  # update count
         memepage, memetitle, memeurl = meme_data['memepage'], meme_data['memetitle'], meme_data['memeurl']
-        return memepage, memetitle, memeurl  # return data
+        return memepage, memetitle, memeurl  # return Resources
