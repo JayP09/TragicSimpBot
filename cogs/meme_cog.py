@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from discfactbot.Resources import meme_db as me
+from Resources import meme_db as me
 import random
 
 

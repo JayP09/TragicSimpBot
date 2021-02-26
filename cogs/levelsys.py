@@ -98,21 +98,27 @@ class LevelSys(commands.Cog):
                                       colour=colour_generator())
                 await ctx.channel.send(embed=embed)
             else:
-                xp = stats["xp"]
+                total_xp = stats['xp']
+                current_xp = stats["current_xp"]
                 lvl = stats['level']
+                max_val = (lvl+1)*100
+                box_ratio = int(max_val/20)
+                green_box = int(current_xp/box_ratio)
+                white_box = 20 - green_box
+                
                 rank = 0
-                boxes = int((xp / (100 * (lvl + 1)) * 10))
                 rankings = levelling.find().sort("xp", -1)  # to sort the database
+                
                 for x in rankings:
                     rank += 1
                     if stats["user_id"] == x["user_id"]:
                         break
-                embed = discord.Embed(title="{}'s level stats".format(ctx.author.name), colour=colour_generator())
-                embed.add_field(name="Name", value=ctx.author.mention, inline=True)
-                embed.add_field(name="XP", value=f"{xp}/{int(100 * (lvl + 1))}", inline=True)
+                embed = discord.Embed(title="{}'s level stats".format(ctx.author.name), description= ctx.author.mention , colour=colour_generator())
+                # embed.add_field(name="Name", value=ctx.author.mention, inline=True)
+                embed.add_field(name="Total_xp", value=f'{total_xp}', inline=True)
+                embed.add_field(name="XP", value=f"{current_xp}/{int(100 * (lvl + 1))}", inline=True)
                 embed.add_field(name="Rank", value=f"{rank}/{ctx.guild.member_count}", inline=True)
-                embed.add_field(name="Progress Bar [lvl]",
-                                value=boxes * ":blue_square:" + (20 - boxes) * ":white_large_square:", inline=True)
+                embed.add_field(name="Progress Bar [lvl]",value=green_box * ":blue_square:" + (white_box) * ":white_large_square:", inline=True)
                 embed.set_thumbnail(url=ctx.author.avatar_url)  # used to get user avatar
                 await ctx.channel.send(embed=embed)
 

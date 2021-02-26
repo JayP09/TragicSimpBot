@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from discfactbot.Resources import motivation as mv
+from Resources import motivation as mv
 import random
 
 
