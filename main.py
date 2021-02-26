@@ -3,7 +3,7 @@ from discord.ext import commands
 from Resources import server as sr
 from Resources import meme_creator_db as me
 import random
-from cogs import levelsys, fact_cog, joke_cog, meme_cog, motivation_cog
+from cogs import levelsys, fact_cog, joke_cog, meme_cog, motivation_cog, help_cog
 
 '''
 this discord library revolves around the concept of event.
@@ -14,7 +14,7 @@ discord.py is asynchronous library so things are done with callbacks
 callback is function that is called when something else happen
 '''
 TOKEN = 'ODA4Njk1NTQyNTAxNzM2NDc5.YCKSag.ZfYS6EGmD2xHtvN3BwfM9ogjdQE'
-cogs = [levelsys, fact_cog, joke_cog, meme_cog, motivation_cog]
+cogs = [levelsys, fact_cog, joke_cog, meme_cog, motivation_cog, help_cog]
 OWNER_IDS = [252353540327079936, 669518518777282561]
 roles_meme = ['NoobMemer', 'MemeRular', 'MemeStar', 'AlphaMemer']
 client = commands.Bot(command_prefix=("pls ", "PLS", 'Pls ', 'pLs ', 'plS '), aliases=['PLS ', 'Pls ', 'pLs ', 'plS '],
