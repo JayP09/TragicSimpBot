@@ -23,3 +23,13 @@ def send_meme(x=0):
         collection.update_one({"_id": random_number}, {"$set": {"count": meme_data['count'] + 1}})  # update count
         memepage, memetitle, memeurl = meme_data['memepage'], meme_data['memetitle'], meme_data['memeurl']
         return memepage, memetitle, memeurl  # return Resources
+
+def send_specific_meme(memepage):
+    data = collection.find({"memepage": memepage})
+    count = data.count()
+    # id = data[0]['_id']
+    # random_number = random.randint(id,count+id-1)
+    random_num = random.randint(0,count-1)
+    meme_data = data[random_num]
+    memepage, memetitle, memeurl = meme_data['memepage'], meme_data['memetitle'], meme_data['memeurl']
+    return memepage, memetitle, memeurl

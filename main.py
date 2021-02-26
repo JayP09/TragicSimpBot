@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from discfactbot.Resources import server as sr
+from Resources import server as sr
 import random
 from cogs import levelsys, fact_cog, joke_cog, meme_cog, motivation_cog
 
@@ -17,7 +17,7 @@ cogs = [levelsys, fact_cog, joke_cog, meme_cog, motivation_cog]
 OWNER_IDS = [252353540327079936, 669518518777282561]
 roles_meme = ['NoobMemer', 'MemeRular', 'MemeStar', 'AlphaMemer']
 client = commands.Bot(command_prefix="pls ", aliases=['PLS ', 'Pls ', 'pLs ', 'plS '], owner_ids=OWNER_IDS,
-                      help_command=None)
+                    help_command=None)
 
 for i in range(len(cogs)):
     cogs[i].setup(client)
