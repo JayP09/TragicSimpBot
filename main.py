@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from Resources import server as sr
+from Resources import meme_creator_db as me
 import random
 from cogs import levelsys, fact_cog, joke_cog, meme_cog, motivation_cog
 
@@ -16,8 +17,9 @@ TOKEN = 'ODA4Njk1NTQyNTAxNzM2NDc5.YCKSag.ZfYS6EGmD2xHtvN3BwfM9ogjdQE'
 cogs = [levelsys, fact_cog, joke_cog, meme_cog, motivation_cog]
 OWNER_IDS = [252353540327079936, 669518518777282561]
 roles_meme = ['NoobMemer', 'MemeRular', 'MemeStar', 'AlphaMemer']
-client = commands.Bot(command_prefix="pls ", aliases=['PLS ', 'Pls ', 'pLs ', 'plS '], owner_ids=OWNER_IDS,
-                    help_command=None)
+client = commands.Bot(command_prefix=("pls ", "PLS", 'Pls ', 'pLs ', 'plS '), aliases=['PLS ', 'Pls ', 'pLs ', 'plS '],
+                      owner_ids=OWNER_IDS,
+                      help_command=None)
 
 for i in range(len(cogs)):
     cogs[i].setup(client)
@@ -117,7 +119,21 @@ async def on_message(message):
         return None
 
     if message.channel.name in channels:
-        print('Hello')
+        if message.content.startswith('meme'):
+            msg = message.content.split(' ')
+            try:
+                page, title, url = me.single_meme(msg[1])
+                if page is None:
+                    embed = discord.Embed(title=title, colour=colour_generator())
+                    embed.set_image(url=url)
+                    await message.channel.send(embed=embed)
+                else:
+                    embed = discord.Embed(title=title, url=url, colour=colour_generator())
+                    embed.set_image(url=url)
+                    embed.set_footer(text="r/" + page)
+                    await message.channel.send(embed=embed)
+            except:
+                print("Not meme page name")
 
     await client.process_commands(message)  # code to execute commands
 
