@@ -8,7 +8,7 @@ level = ['NoobMemer', 'MemeRular', 'MemeStar', 'AlphaMemer']
 levelnum = [5, 10, 15, 20]
 
 client = MongoClient(
-    "mongodb+srv://BeLazy:BeLazy@cluster0.csr3d.mongodb.net/myFirstDatabase?retryWrites=true&w=majority") # to connect mongodb server
+    "mongodb+srv://BeLazy:BeLazy@cluster0.csr3d.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")  # to connect mongodb server
 db = client["meme"]
 levelling = db["levelling"]
 
@@ -46,43 +46,48 @@ class LevelSys(commands.Cog):
         if message.content.lower() == '--rank':
             return None
         if message.channel.name in bot_channel:
-            stats = levelling.find_one({"user_id": message.author.id})
-            if not message.author.bot:
-                if stats is None:
-                    newuser = {"user_id": message.author.id, "username": message.author.name, "xp": 0, "current_xp": 0,
-                               "level": 1}
-                    levelling.insert_one(newuser)  # insert user in database
-                else:
-                    current_xp = stats['current_xp']
-                    lvl = stats["level"]
-                    xp = stats["xp"] + 10
-                    current_xp += 10
-                    # if current_xp > level * 100:
-                    #     current_xp = current_xp - level * 100
-                    #     level += 1
-                    #     levelling.update_one({"user_id": message.author.id},
-                    #                          {"$set": {"current_xp": current_xp, "level": level}})
-                    cur_xp, user_level = user_level_info(current_xp, lvl)
-                    levelling.update_one({"user_id": message.author.id},
-                                         {"$set": {"current_xp": cur_xp, "xp": xp, "level": user_level}})  # update Resources in mongodb database
-                    print(user_level)
-                    if lvl >= user_level:
-                        print(user_level, "level not updated")
+            msg = message.content.split(' ')
+            if msg[0].upper() == 'PLS' or msg[0].upper() == 'MEME':
+                stats = levelling.find_one({"user_id": message.author.id})
+                if not message.author.bot:
+                    if stats is None:
+                        newuser = {"user_id": message.author.id, "username": message.author.name, "xp": 0,
+                                   "current_xp": 0,
+                                   "level": 1}
+                        levelling.insert_one(newuser)  # insert user in database
                     else:
-                        print(user_level, "inside else")
-                        levelling.update_one({"user_id": message.author.id}, {"$set": {"level": user_level}})
-                        embed = discord.Embed(
-                            description=f"well done {message.author.mention}! You leveled up to **level: {user_level}**!",
-                            colour=colour_generator())
-                        await message.channel.send(embed=embed)
-                        for i in range(len(level)):
-                            if user_level == levelnum[i]:
-                                await message.author.add_roles(
-                                    discord.utils.get(message.author.guild.roles, name=level[i]))
-                                embed = discord.Embed(
-                                    description=f"{message.author.mention} you have gotten role **{level[i]}**!!!")
-                                embed.set_thumbnail(url=message.author.avatar_url)  # assign role to user
-                                await message.channel.send(embed=embed)
+                        current_xp = stats['current_xp']
+                        lvl = stats["level"]
+                        xp = stats["xp"] + 10
+                        current_xp += 10
+                        # if current_xp > level * 100:
+                        #     current_xp = current_xp - level * 100
+                        #     level += 1
+                        #     levelling.update_one({"user_id": message.author.id},
+                        #                          {"$set": {"current_xp": current_xp, "level": level}})
+                        cur_xp, user_level = user_level_info(current_xp, lvl)
+                        levelling.update_one({"user_id": message.author.id},
+                                             {"$set": {"current_xp": cur_xp, "xp": xp,
+                                                       "level": user_level}})  # update Resources in mongodb database
+                        # print(user_level)
+                        if lvl >= user_level:
+                            pass
+                            # print(user_level, "level not updated")
+                        else:
+                            print(user_level, "inside else")
+                            levelling.update_one({"user_id": message.author.id}, {"$set": {"level": user_level}})
+                            embed = discord.Embed(
+                                description=f"well done {message.author.mention}! You leveled up to **level: {user_level}**!",
+                                colour=colour_generator())
+                            await message.channel.send(embed=embed)
+                            for i in range(len(level)):
+                                if user_level == levelnum[i]:
+                                    await message.author.add_roles(
+                                        discord.utils.get(message.author.guild.roles, name=level[i]))
+                                    embed = discord.Embed(
+                                        description=f"{message.author.mention} you have gotten role **{level[i]}**!!!")
+                                    embed.set_thumbnail(url=message.author.avatar_url)  # assign role to user
+                                    await message.channel.send(embed=embed)
 
     @commands.command()
     async def rank(self, ctx):  # give rank of user
@@ -97,7 +102,7 @@ class LevelSys(commands.Cog):
                 lvl = stats['level']
                 rank = 0
                 boxes = int((xp / (100 * (lvl + 1)) * 10))
-                rankings = levelling.find().sort("xp", -1) # to sort the database
+                rankings = levelling.find().sort("xp", -1)  # to sort the database
                 for x in rankings:
                     rank += 1
                     if stats["user_id"] == x["user_id"]:
