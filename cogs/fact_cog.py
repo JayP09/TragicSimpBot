@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from Resources import fact as ft
+from discfactbot.Resources import fact as ft
 import re
 
 bot_channel = 'joke-and-fact'

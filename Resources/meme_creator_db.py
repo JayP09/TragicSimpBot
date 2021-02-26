@@ -15,20 +15,22 @@ client_secret = 'PhYFLRgpllL3ZPpdIQe3D5yhRWc'
 username = "DK00167"
 password = "98766789"
 reddit = praw.Reddit(client_id=client_id, client_secret=client_secret, username=username, password=password,
-                    user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36")
+                     user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36")
+
 
 def sub_exists(sub):
     exists = True
     try:
         reddit.subreddits.search_by_name(sub, exact=True)
-    except NotFound:        
+    except NotFound:
         exists = False
     return exists
 
+
 def meme_file_creator():
     page_list = ['funny', 'dankmemes', 'memes', 'teenagers', 'Chodi', "DsyncTV", 'cursedcomments', 'holdup',
-                'SaimanSays/', 'wholesomememes', 'IndianMeyMeys', 'indiameme', 'desimemes', 'Tinder', '2meirl4meirl',
-                'ComedyCemetery', 'terriblefacebookmemes']
+                 'SaimanSays/', 'wholesomememes', 'IndianMeyMeys', 'indiameme', 'desimemes', 'Tinder', '2meirl4meirl',
+                 'ComedyCemetery', 'terriblefacebookmemes']
     # field = ['MemePage', 'Memetitle', 'MemeUrl']
     j = 1
     for meme_page in page_list:
@@ -44,14 +46,21 @@ def meme_file_creator():
                 break  # number of memes per page
     print('done')
 
+
 def single_meme(page):
     if sub_exists(page):
         page_data = reddit.subreddit(page)
-        post = page_data.hot()
+        post = page_data.new()
+        print(post)
         for posts in post:
             if re.search("^https?://(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:/[^/#?]+)+\.(?:jpg)$", posts.url):
-                memepage, memetitle, memeurl = page , posts.title , posts.url
+                memepage, memetitle, memeurl = page, posts.title, posts.url
                 return memepage, memetitle, memeurl  # return Resources
+            elif re.search("^https?://(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:/[^/#?]+)+\.(?:gif)$", posts.url):
+                memepage, memetitle, memeurl = page, posts.title, posts.url
+                return memepage, memetitle, memeurl  # return Resources
+            else:
+                continue
     else:
-        memepage, memetitle, memeurl = 'Null' , 'Failed' ,'https://media.giphy.com/media/HNEmXQz7A0lDq/giphy.gif'
-        return memepage , memetitle ,memeurl
+        memepage, memetitle, memeurl = None, 'Failed', 'https://media.giphy.com/media/HNEmXQz7A0lDq/giphy.gif'
+        return memepage, memetitle, memeurl

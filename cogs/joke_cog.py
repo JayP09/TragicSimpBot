@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from Resources import joke as jk
+from discfactbot.Resources import joke as jk
 import random
 
 
