@@ -34,7 +34,7 @@ class Fact(commands.Cog):
                 n_fact = ft.get_date_fact(fact_type)  # return date fact
                 embed = discord.Embed(description=n_fact, colour=0x00ff00)
                 await message.channel.send(embed=embed)
-            elif fact_type.upper() == 'ANIMALS':  # return random animals fact
+            elif fact_type.upper() == 'ANIMAL':  # return random animals fact
                 animals_fact = ft.get_animals_fact()
                 embed = discord.Embed(description=animals_fact, colour=0x00ff00)
                 await message.channel.send(embed=embed)
