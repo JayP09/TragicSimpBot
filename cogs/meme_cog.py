@@ -37,10 +37,14 @@ class Meme(commands.Cog):
                 embed.set_image(url=url)
                 embed.set_footer(text="r/" + meme_page)
                 await message.channel.send(embed=embed)
-            elif meme_type.upper() in page_list:
-                pass
+            elif meme_type in page_list:
+                meme_page, title, url = me.send_specific_meme(meme_type)
+                embed = discord.Embed(title=title, url=url, colour=colour_generator())
+                embed.set_image(url=url)
+                embed.set_footer(text="r/" + meme_page)
+                await message.channel.send(embed=embed)
             else:
-                print("No meme to send. Try after 1 min")
+                print("No meme to send. Try after 1 min or the page you are requsting is not available")
 
 
 def setup(client):

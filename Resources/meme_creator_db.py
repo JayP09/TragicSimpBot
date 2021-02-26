@@ -1,6 +1,7 @@
 import pymongo
 import praw
 import re
+from prawcore import NotFound
 
 # database setup mongodb
 client = pymongo.MongoClient(
@@ -9,12 +10,21 @@ db = client["meme"]
 collection = db["memedata"]
 post = {}
 # reddit 0auth
-client_id = "rhIT7vI1LhIJhw"
-client_secret = 'stwGm_NcKbz8FrQr7oVp9BTHfc9Tlg'
-username = "_sorrymybad_"
-password = "Jay@0906"
+client_id = "OZsROIAyH5bAbA"
+client_secret = 'PhYFLRgpllL3ZPpdIQe3D5yhRWc'
+username = "DK00167"
+password = "98766789"
 reddit = praw.Reddit(client_id=client_id, client_secret=client_secret, username=username, password=password,
                      user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36")
+
+
+def sub_exists(sub):
+    exists = True
+    try:
+        reddit.subreddits.search_by_name(sub, exact=True)
+    except NotFound:
+        exists = False
+    return exists
 
 
 def meme_file_creator():
@@ -35,3 +45,22 @@ def meme_file_creator():
             if i == 5:
                 break  # number of memes per page
     print('done')
+
+
+def single_meme(page):
+    if sub_exists(page):
+        page_data = reddit.subreddit(page)
+        post = page_data.new()
+        print(post)
+        for posts in post:
+            if re.search("^https?://(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:/[^/#?]+)+\.(?:jpg)$", posts.url):
+                memepage, memetitle, memeurl = page, posts.title, posts.url
+                return memepage, memetitle, memeurl  # return Resources
+            elif re.search("^https?://(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:/[^/#?]+)+\.(?:gif)$", posts.url):
+                memepage, memetitle, memeurl = page, posts.title, posts.url
+                return memepage, memetitle, memeurl  # return Resources
+            else:
+                continue
+    else:
+        memepage, memetitle, memeurl = None, 'Failed', 'https://media.giphy.com/media/HNEmXQz7A0lDq/giphy.gif'
+        return memepage, memetitle, memeurl
