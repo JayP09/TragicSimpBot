@@ -1,0 +1,3 @@
+__pycache__/*.pyc
+cogs/__pycache__/*.pyc
+Resources/__pycache__/*.pyc
