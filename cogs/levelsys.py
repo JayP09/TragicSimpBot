@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from pymongo import MongoClient
 import random
-from discfactbot.Resources import config, server
+from discfactbot.Resources import config
 
 bot_channel = 'joke-and-fact'
 level = ['NoobMemer', 'MemeRular', 'MemeStar', 'AlphaMemer']
