@@ -22,6 +22,6 @@ class Database_oauth():
 
         return self.reddit
     
-    def motivation_key(self):
+    def quote_key(self):
         
         return self.ACCESS_KEY_QUOTES

@@ -2,8 +2,10 @@ import discord
 from discord.ext import commands
 from Resources import server as sr
 from Resources import meme_creator_db as me
+from Resources import config
+from discord.ext.commands import when_mentioned_or
 import random
-from cogs import levelsys, fact_cog, joke_cog, meme_cog, motivation_cog, help_cog
+from cogs import levelsys, fact_cog, joke_cog, meme_cog, motivation_cog, help_cog, misc_cog
 
 '''
 this discord library revolves around the concept of event.
@@ -14,16 +16,32 @@ discord.py is asynchronous library so things are done with callbacks
 callback is function that is called when something else happen
 '''
 TOKEN = 'ODA4Njk1NTQyNTAxNzM2NDc5.YCKSag.ZfYS6EGmD2xHtvN3BwfM9ogjdQE'
-cogs = [levelsys, fact_cog, joke_cog, meme_cog, motivation_cog, help_cog]
+cogs = [levelsys, fact_cog, joke_cog, meme_cog, motivation_cog, help_cog, misc_cog]
 OWNER_IDS = [252353540327079936, 669518518777282561]
 roles_meme = ['NoobMemer', 'MemeRular', 'MemeStar', 'AlphaMemer']
-client = commands.Bot(command_prefix=("pls ", "PLS", 'Pls ', 'pLs ', 'plS '), aliases=['PLS ', 'Pls ', 'pLs ', 'plS '],
+client_obj = config.Database_oauth()
+db_client = client_obj.database_info()
+
+
+def get_prefix(bot, message):
+    db = db_client['meme']
+    collection = db["server_info"]
+    data = collection.find_one({'server_id': message.guild.id})
+    if data is None:
+        print('Server Not found')
+    else:
+        prefix = data['command_prefix']
+        return when_mentioned_or(prefix)(bot, message)
+
+
+client = commands.Bot(command_prefix=get_prefix, aliases=['PLS ', 'Pls ', 'pLs ', 'plS '],
                       owner_ids=OWNER_IDS, help_command=None)
 
 
 def full_run():
     for i in range(len(cogs)):
         cogs[i].setup(client)
+
 
     @client.command(name='setup')
     @commands.has_permissions(manage_roles=True)
@@ -88,6 +106,7 @@ def full_run():
     async def on_ready():  # this will call when bot is ready to use
         print('we have logged in as {0.user}'.format(client))
         for guild in client.guilds:
+            server_id = guild.id
             server_name = guild.name
             channel_guild = guild.text_channels
             role_guild = guild.roles
@@ -97,7 +116,7 @@ def full_run():
                 roles_list.append(role.name)
             for channel in channel_guild:
                 text_channels_list.append(channel.name)
-            sr.add_server_info(server_name, text_channels_list, roles_list)
+            sr.add_server_info(server_id, server_name, text_channels_list, roles_list)
 
     def colour_generator():
         r = random.randint(0, 255)

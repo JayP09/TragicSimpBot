@@ -8,7 +8,7 @@ client = client_obj.database_info()
 db = client["meme"]
 collection = db["quotes"]
 CATEGORY = ['MOTIVATION', 'INSPIRATION', 'INSPIRE', 'MOTIVATIONAL', 'PRODUCTIVE']
-ACCESS_KEY_QUOTES = client_obj.motivation_key()
+ACCESS_KEY_QUOTES = client_obj.quote_key()
 id_value = collection.estimated_document_count()
 
 

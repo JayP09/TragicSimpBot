@@ -19,7 +19,7 @@ class Motivation(commands.Cog):
     async def on_ready(self):
         print("Motivation Cog ready")
 
-    @commands.command(name="motivation", aliases=['MOTIVATION', 'Motivation', 'MotivatioN'])
+    @commands.command(name="quote", aliases=['Quote', 'QUOTE', 'QuotE'])
     async def fact(self, message, motivation_type="None"):
         channels = ['joke-and-fact']
         motivation_Category = ['MOTIVATION', 'inspiration', 'inspire', 'motivational', 'productive']

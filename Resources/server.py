@@ -7,15 +7,17 @@ db = client["meme"]
 collection = db["server_info"]
 
 
-def add_server_info(server_name, text_channels_list, roles_list):
+def add_server_info(server_id, server_name, text_channels_list, roles_list):
     total_server = collection.estimated_document_count()  # gives total server in server_info collection
     if total_server == 0:  # check if database is empty
-        server = {"server_name": server_name, "text_channels": text_channels_list, "roles": roles_list}
+        server = {"server_id": server_id, "server_name": server_name, "text_channels": text_channels_list,
+                  "roles": roles_list, "command_prefix": "pls "}
         collection.insert_one(server)  # insert server info to database
     else:
         data = collection.find_one({"server_name": server_name, "text_channels": text_channels_list})
         if str(data) == "None":
-            server = {"server_name": server_name, "text_channels": text_channels_list, "roles": roles_list}
+            server = {"server_id": server_id, "server_name": server_name, "text_channels": text_channels_list,
+                      "roles": roles_list, "command_prefix": "pls "}
             collection.insert_one(server)
         else:
             print("server is already present")
@@ -67,8 +69,3 @@ def update_server_roles_info(roles_list, server_name):
         if role not in roles_info:
             roles_info.append(role)
     collection.update_one({"server_name": server_name}, {"$set": {"roles": roles_info}})
-
-
-
-
-
