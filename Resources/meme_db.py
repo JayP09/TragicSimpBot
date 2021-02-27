@@ -1,5 +1,5 @@
 import random
-import pymongo
+
 from Resources import config
 from prawcore import NotFound
 import re
@@ -33,8 +33,6 @@ def send_meme(x=0):
 def send_specific_meme(memepage):
     data = collection.find({"memepage": memepage})
     count = data.count()
-    # id = data[0]['_id']
-    # random_number = random.randint(id,count+id-1)
     random_num = random.randint(0, count - 1)
     meme_data = data[random_num]
     memepage, memetitle, memeurl = meme_data['memepage'], meme_data['memetitle'], meme_data['memeurl']
@@ -59,5 +57,9 @@ def single_meme(page):
                 memepage, memetitle, memeurl = page, posts.title, posts.url
                 return memepage, memetitle, memeurl  # return Resources
     else:
-        memepage, memetitle, memeurl = None, 'Failed', 'https://media.giphy.com/media/HNEmXQz7A0lDq/giphy.gif'
+        
+        gif_list = ['http://gph.is/2cPVZfL','http://gph.is/1SuCOVi','http://gph.is/16sUz2u','http://gph.is/16sUz2u','http://gph.is/16sUz2u','http://gph.is/XKdD7x','https://gph.is/g/4bxR80v','https://media.giphy.com/media/HNEmXQz7A0lDq/giphy.gif','https://gph.is/g/4zWL7wK','https://gph.is/g/ZWpQOd4']
+        memepage, memetitle, memeurl = None, 'Failed', random.choice(gif_list)
         return memepage, memetitle, memeurl
+
+

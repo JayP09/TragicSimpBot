@@ -32,6 +32,4 @@ def meme_file_creator():
                 break  # number of memes per page
     print('done')
 
-
-
 meme_file_creator()

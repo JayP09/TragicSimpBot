@@ -44,7 +44,10 @@ class Meme(commands.Cog):
                 embed.set_footer(text="r/" + meme_page)
                 await message.channel.send(embed=embed)
             else:
-                print("No meme to send. Try after 1 min or the page you are requesting is not available")
+                embed = discord.Embed(title="Falied", colour=0x00ff00)
+                gif_list = ['http://gph.is/2cPVZfL','http://gph.is/1SuCOVi','http://gph.is/16sUz2u','http://gph.is/16sUz2u','http://gph.is/16sUz2u','http://gph.is/XKdD7x','https://gph.is/g/4bxR80v','https://media.giphy.com/media/HNEmXQz7A0lDq/giphy.gif','https://gph.is/g/4zWL7wK','https://gph.is/g/ZWpQOd4']
+                embed.set_image(url = random.choice(gif_list))
+                await message.channel.send(embed=embed)
 
 
 def setup(client):
