@@ -1,8 +1,7 @@
 import pymongo
 import praw
 import re
-from prawcore import NotFound
-from Resources import config
+from cogs import config
 # database setup mongodb
 client_obj = config.Database_oauth()
 client = client_obj.database_info()
@@ -13,19 +12,12 @@ post = {}
 # reddit 0auth
 reddit = client_obj.oauth_info()
 
-def sub_exists(sub):
-    exists = True
-    try:
-        reddit.subreddits.search_by_name(sub, exact=True)
-    except NotFound:
-        exists = False
-    return exists
-
 
 def meme_file_creator():
+    collection.drop()
     page_list = ['funny', 'dankmemes', 'memes', 'teenagers', 'Chodi', "DsyncTV", 'cursedcomments', 'holdup',
-                 'SaimanSays/', 'wholesomememes', 'IndianMeyMeys', 'indiameme', 'desimemes', 'Tinder', '2meirl4meirl',
-                 'ComedyCemetery', 'terriblefacebookmemes']
+                'SaimanSays/', 'wholesomememes', 'IndianMeyMeys', 'indiameme', 'desimemes', 'Tinder', '2meirl4meirl',
+                'ComedyCemetery', 'terriblefacebookmemes']
     # field = ['MemePage', 'Memetitle', 'MemeUrl']
     j = 1
     for meme_page in page_list:
@@ -42,20 +34,5 @@ def meme_file_creator():
     print('done')
 
 
-def single_meme(page):
-    if sub_exists(page):
-        page_data = reddit.subreddit(page)
-        post = page_data.new()
-        print(post)
-        for posts in post:
-            if re.search("^https?://(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:/[^/#?]+)+\.(?:jpg)$", posts.url):
-                memepage, memetitle, memeurl = page, posts.title, posts.url
-                return memepage, memetitle, memeurl  # return Resources
-            elif re.search("^https?://(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:/[^/#?]+)+\.(?:gif)$", posts.url):
-                memepage, memetitle, memeurl = page, posts.title, posts.url
-                return memepage, memetitle, memeurl  # return Resources
-            else:
-                continue
-    else:
-        memepage, memetitle, memeurl = None, 'Failed', 'https://media.giphy.com/media/HNEmXQz7A0lDq/giphy.gif'
-        return memepage, memetitle, memeurl
+
+meme_file_creator()

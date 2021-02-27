@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from pymongo import MongoClient
 import random
-from discfactbot.Resources import config
+from Resources import config
 
 bot_channel = 'joke-and-fact'
 level = ['NoobMemer', 'MemeRular', 'MemeStar', 'AlphaMemer']
@@ -65,11 +65,11 @@ class LevelSys(commands.Cog):
                             roles_list.append(role.name)
                         print(roles_list)
                         newuser = {"user_id": message.author.id, "username": message.author.name,
-                                   "server_name": message.guild.name,
-                                   "user_roles": roles_list,
-                                   "xp": 0,
-                                   "current_xp": 0,
-                                   "level": 1}
+                                "server_name": message.guild.name,
+                                "user_roles": roles_list,
+                                "xp": 0,
+                                "current_xp": 0,
+                                "level": 1}
                         levelling.insert_one(newuser)  # insert user in database
                     else:
                         current_xp = stats['current_xp']

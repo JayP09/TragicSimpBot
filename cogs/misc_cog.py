@@ -3,7 +3,7 @@ from discord.ext.commands import CheckFailure
 from discord.ext.commands import command, has_permissions
 import discord
 
-from discfactbot.Resources import config
+from Resources import config
 
 client_obj = config.Database_oauth()
 client = client_obj.database_info()

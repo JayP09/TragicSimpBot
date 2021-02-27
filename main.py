@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from Resources import server as sr
-from Resources import meme_creator_db as me
+from Resources import meme_db as me
 from Resources import config
 from discord.ext.commands import when_mentioned_or
 import random

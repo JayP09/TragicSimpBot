@@ -1,11 +1,15 @@
 import random
 import pymongo
 from Resources import config
+from prawcore import NotFound
+import re
+
 
 client_obj = config.Database_oauth()
 client = client_obj.database_info()
 db = client["meme"]
 collection = db["memedata"]
+reddit = client_obj.oauth_info()
 
 max_count = list(collection.find().sort("count", -1).limit(1))[0]['count']  # get max count
 
@@ -34,3 +38,24 @@ def send_specific_meme(memepage):
     meme_data = data[random_num]
     memepage, memetitle, memeurl = meme_data['memepage'], meme_data['memetitle'], meme_data['memeurl']
     return memepage, memetitle, memeurl
+
+def sub_exists(sub):
+    exists = True
+    try:
+        reddit.subreddits.search_by_name(sub, exact=True)
+    except NotFound:
+        exists = False
+    return exists
+
+def single_meme(page):
+    if sub_exists(page):
+        page_data = reddit.subreddit(page)
+        post = page_data.hot()
+        print(post)
+        for posts in post:
+            if re.search("^https?://(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:/[^/#?]+)+\.(?:jpg|gif)$", posts.url):
+                memepage, memetitle, memeurl = page, posts.title, posts.url
+                return memepage, memetitle, memeurl  # return Resources
+    else:
+        memepage, memetitle, memeurl = None, 'Failed', 'https://media.giphy.com/media/HNEmXQz7A0lDq/giphy.gif'
+        return memepage, memetitle, memeurl
