@@ -28,7 +28,7 @@
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/forks/JayP09/discfactbot?color=%23555&label=Fork&style=flat-square
+[contributors-shield]: https://img.shields.io/github/forks/JayP09/discfactbot?color=%23555&label=Fork&style=for-the-badge
 [contributors-url]: https://github.com/JayP09/discfactbot/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
 [forks-url]: https://github.com/JayP09/discfactbot/network/members
