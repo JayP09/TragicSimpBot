@@ -17,13 +17,13 @@ TOKEN = 'ODA4Njk1NTQyNTAxNzM2NDc5.YCKSag.ZfYS6EGmD2xHtvN3BwfM9ogjdQE'
 cogs = [levelsys, fact_cog, joke_cog, meme_cog, motivation_cog, help_cog]
 OWNER_IDS = [252353540327079936, 669518518777282561]
 roles_meme = ['NoobMemer', 'MemeRular', 'MemeStar', 'AlphaMemer']
-client = commands.Bot(command_prefix=("pls ", "PLS", 'Pls ', 'pLs ', 'plS '), aliases=['PLS ', 'Pls ', 'pLs ', 'plS '],owner_ids=OWNER_IDS,help_command=None)
+client = commands.Bot(command_prefix=("pls ", "PLS", 'Pls ', 'pLs ', 'plS '), aliases=['PLS ', 'Pls ', 'pLs ', 'plS '],
+                      owner_ids=OWNER_IDS, help_command=None)
 
 
 def full_run():
     for i in range(len(cogs)):
         cogs[i].setup(client)
-
 
     @client.command(name='setup')
     @commands.has_permissions(manage_roles=True)
@@ -39,6 +39,7 @@ def full_run():
             await message.send(embed=embed)
         else:
             await guild.create_text_channel(name=channel_name)  # create text channel in server
+            sr.update_channel_info(channel_name, guild.name)
             embed = discord.Embed(
                 title='Success',
                 description="joke & fact channel has been successfully created.",
@@ -51,7 +52,7 @@ def full_run():
                 continue
             else:
                 await guild.create_role(name=role, colour=discord.Colour.random())
-
+                sr.update_server_roles_info(roles_meme, guild.name)
 
     @client.event
     async def on_guild_channel_delete(channel):
@@ -59,23 +60,19 @@ def full_run():
         guild = channel.guild
         sr.update_server_info(guild.name, channel_name)
 
-
     @client.event
     async def on_guild_channel_create(channel):
         channel_name = channel.name
         guild = channel.guild
         sr.update_server_info(guild.name, channel_name)
 
-
     @client.event
     async def on_connect():
         print(" bot connected")
 
-
     @client.event
     async def on_disconnect():
         print("bot disconnected")
-
 
     @client.event
     async def on_member_join(member):  # when member join the server
@@ -83,11 +80,9 @@ def full_run():
             if str(channel) == 'general':
                 await member.server.channel.send(f"""Welcome to the server {member}""")
 
-
     @client.event
     async def on_member_join(self, member):
         pass
-
 
     @client.event  # to register an event
     async def on_ready():  # this will call when bot is ready to use
@@ -104,13 +99,11 @@ def full_run():
                 text_channels_list.append(channel.name)
             sr.add_server_info(server_name, text_channels_list, roles_list)
 
-
     def colour_generator():
         r = random.randint(0, 255)
         g = random.randint(0, 255)
         b = random.randint(0, 255)
         return discord.Colour.from_rgb(r, g, b)
-
 
     @client.event
     async def on_message(message):
@@ -137,8 +130,8 @@ def full_run():
 
         await client.process_commands(message)  # code to execute commands
 
-
     client.run(TOKEN)
+
 
 if __name__ == "__main__":
     full_run()

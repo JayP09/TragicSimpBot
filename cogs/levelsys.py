@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from pymongo import MongoClient
 import random
-from Resources import config
+from discfactbot.Resources import config, server
 
 bot_channel = 'joke-and-fact'
 level = ['NoobMemer', 'MemeRular', 'MemeStar', 'AlphaMemer']
@@ -21,6 +21,13 @@ def user_level_info(current_xp, lvl):
         return current_xp, lvl
     else:
         return current_xp, lvl
+
+
+def update_user_roles_info(user_id, role):
+    roles_list = levelling['user_roles']
+    if role not in roles_list:
+        roles_list.append(role)
+    levelling.update_one({"user_id": user_id}, {"$set": {'user_roles': roles_list}})
 
 
 def colour_generator():  # return random generated colour
@@ -52,7 +59,15 @@ class LevelSys(commands.Cog):
                 stats = levelling.find_one({"user_id": message.author.id})
                 if not message.author.bot:
                     if stats is None:
-                        newuser = {"user_id": message.author.id, "username": message.author.name, "xp": 0,
+                        role_guild = message.author.guild.roles
+                        roles_list = []
+                        for role in role_guild:
+                            roles_list.append(role.name)
+                        print(roles_list)
+                        newuser = {"user_id": message.author.id, "username": message.author.name,
+                                   "server_name": message.guild.name,
+                                   "user_roles": roles_list,
+                                   "xp": 0,
                                    "current_xp": 0,
                                    "level": 1}
                         levelling.insert_one(newuser)  # insert user in database
@@ -61,11 +76,6 @@ class LevelSys(commands.Cog):
                         lvl = stats["level"]
                         xp = stats["xp"] + 10
                         current_xp += 10
-                        # if current_xp > level * 100:
-                        #     current_xp = current_xp - level * 100
-                        #     level += 1
-                        #     levelling.update_one({"user_id": message.author.id},
-                        #                          {"$set": {"current_xp": current_xp, "level": level}})
                         cur_xp, user_level = user_level_info(current_xp, lvl)
                         levelling.update_one({"user_id": message.author.id},
                                              {"$set": {"current_xp": cur_xp, "xp": xp,
@@ -85,6 +95,7 @@ class LevelSys(commands.Cog):
                                 if user_level == levelnum[i]:
                                     await message.author.add_roles(
                                         discord.utils.get(message.author.guild.roles, name=level[i]))
+                                    update_user_roles_info(message.author.id, level[i])
                                     embed = discord.Embed(
                                         description=f"{message.author.mention} you have gotten role **{level[i]}**!!!")
                                     embed.set_thumbnail(url=message.author.avatar_url)  # assign role to user
@@ -96,30 +107,32 @@ class LevelSys(commands.Cog):
             stats = levelling.find_one({"user_id": ctx.author.id})
             if stats is None:
                 embed = discord.Embed(description="You haven't sent any messages, no rank!!!",
-                                    colour=colour_generator())
+                                      colour=colour_generator())
                 await ctx.channel.send(embed=embed)
             else:
                 total_xp = stats['xp']
                 current_xp = stats["current_xp"]
                 lvl = stats['level']
-                max_val = (lvl+1)*100
-                box_ratio = int(max_val/20)
-                green_box = int(current_xp/box_ratio)
+                max_val = (lvl + 1) * 100
+                box_ratio = int(max_val / 20)
+                green_box = int(current_xp / box_ratio)
                 white_box = 20 - green_box
-                
+
                 rank = 0
                 rankings = levelling.find().sort("xp", -1)  # to sort the database
-                
+
                 for x in rankings:
                     rank += 1
                     if stats["user_id"] == x["user_id"]:
                         break
-                embed = discord.Embed(title="{}'s level stats".format(ctx.author.name), description= ctx.author.mention , colour=colour_generator())
+                embed = discord.Embed(title="{}'s level stats".format(ctx.author.name), description=ctx.author.mention,
+                                      colour=colour_generator())
                 # embed.add_field(name="Name", value=ctx.author.mention, inline=True)
                 embed.add_field(name="Total_xp", value=f'{total_xp}', inline=True)
                 embed.add_field(name="XP", value=f"{current_xp}/{int(100 * (lvl + 1))}", inline=True)
                 embed.add_field(name="Rank", value=f"{rank}/{ctx.guild.member_count}", inline=True)
-                embed.add_field(name="Progress Bar [lvl]",value=green_box * ":blue_square:" + (white_box) * ":white_large_square:", inline=True)
+                embed.add_field(name="Progress Bar [lvl]",
+                                value=green_box * ":blue_square:" + (white_box) * ":white_large_square:", inline=True)
                 embed.set_thumbnail(url=ctx.author.avatar_url)  # used to get user avatar
                 await ctx.channel.send(embed=embed)
 

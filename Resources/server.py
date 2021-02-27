@@ -1,5 +1,5 @@
 import pymongo
-from Resources import config
+from discfactbot.Resources import config
 
 client_obj = config.Database_oauth()
 client = client_obj.database_info()
@@ -51,3 +51,24 @@ def update_server_info(server_name,
             text_channels.append(channel_name)
             print(text_channels)
             collection.update_one({"server_name": server_name}, {"$set": {"text_channels": text_channels}})
+
+
+def update_channel_info(channel_name, server_name):
+    text_channels = collection['text_channels']
+    print(text_channels)
+    if channel_name not in text_channels:
+        text_channels.append(channel_name)
+        collection.update_one({"server_name": server_name}, {"$set": {"text_channels": text_channels}})
+
+
+def update_server_roles_info(roles_list, server_name):
+    roles_info = collection['roles']
+    for role in range(len(roles_list)):
+        if role not in roles_info:
+            roles_info.append(role)
+    collection.update_one({"server_name": server_name}, {"$set": {"roles": roles_info}})
+
+
+
+
+
