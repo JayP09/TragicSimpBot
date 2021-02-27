@@ -18,8 +18,8 @@ class Misc(Cog):
     @command(name="prefix")
     @has_permissions(manage_guild=True)
     async def change_prefix(self, ctx, new: str):
-        if len(new) >= 3:
-            embed = discord.Embed(title="Failed", description="The prefix can not be more than 5 characters in length",
+        if len(new) > 4:
+            embed = discord.Embed(title="Failed", description="The prefix can not be more than 3 characters in length",
                                   colour=0x00ff00)
             await ctx.channel.send(embed=embed)
         else:

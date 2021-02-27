@@ -1,5 +1,5 @@
 import pymongo
-from discfactbot.Resources import config
+from Resources import config
 
 client_obj = config.Database_oauth()
 client = client_obj.database_info()
