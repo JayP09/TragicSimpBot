@@ -1,12 +1,13 @@
 import random
 import pymongo
+from Resources import config
 
-client = pymongo.MongoClient(
-    "mongodb+srv://BeLazy:BeLazy@cluster0.csr3d.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+client_obj = config.Database_oauth()
+client = client_obj.database_info()
 db = client["meme"]
 collection = db["memedata"]
-max_count = list(collection.find().sort("count", -1).limit(1))[0]['count']  # get max count
 
+max_count = list(collection.find().sort("count", -1).limit(1))[0]['count']  # get max count
 
 def send_meme(x=0):
     total_memes = collection.estimated_document_count()  # total_meme

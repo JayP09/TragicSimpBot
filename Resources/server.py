@@ -1,7 +1,8 @@
 import pymongo
+from Resources import config
 
-client = pymongo.MongoClient(
-    "mongodb+srv://BeLazy:BeLazy@cluster0.csr3d.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+client_obj = config.Database_oauth()
+client = client_obj.database_info()
 db = client["meme"]
 collection = db["server_info"]
 

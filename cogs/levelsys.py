@@ -2,13 +2,14 @@ import discord
 from discord.ext import commands
 from pymongo import MongoClient
 import random
+from Resources import config
 
 bot_channel = 'joke-and-fact'
 level = ['NoobMemer', 'MemeRular', 'MemeStar', 'AlphaMemer']
 levelnum = [5, 10, 15, 20]
-
-client = MongoClient(
-    "mongodb+srv://BeLazy:BeLazy@cluster0.csr3d.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")  # to connect mongodb server
+client_obj = config.Database_oauth()
+client = client_obj.database_info()
+# to connect mongodb server
 db = client["meme"]
 levelling = db["levelling"]
 
@@ -95,7 +96,7 @@ class LevelSys(commands.Cog):
             stats = levelling.find_one({"user_id": ctx.author.id})
             if stats is None:
                 embed = discord.Embed(description="You haven't sent any messages, no rank!!!",
-                                      colour=colour_generator())
+                                    colour=colour_generator())
                 await ctx.channel.send(embed=embed)
             else:
                 total_xp = stats['xp']

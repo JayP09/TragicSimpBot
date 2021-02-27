@@ -1,14 +1,14 @@
 import requests
 import random
 import pymongo
+from Resources import config
 
-client = pymongo.MongoClient(
-    "mongodb+srv://BeLazy:BeLazy@cluster0.csr3d.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+client_obj = config.Database_oauth()
+client = client_obj.database_info()
 db = client["meme"]
 collection = db["quotes"]
-# CATEGORY = ['motivation', 'inspiration', 'inspire', 'motivational', 'productive']
 CATEGORY = ['MOTIVATION', 'INSPIRATION', 'INSPIRE', 'MOTIVATIONAL', 'PRODUCTIVE']
-ACCESS_KEY_QUOTES = '96e7fd9bbc2a1bc1d2f8144ef0dbb488'
+ACCESS_KEY_QUOTES = client_obj.motivation_key()
 id_value = collection.estimated_document_count()
 
 
