@@ -51,7 +51,6 @@ def random_quote_fav():
     returns a quote and author
     """
     response = requests.get('https://favqs.com/api/qotd', verify=False)
-    print(response.json())
     quote_random = response.json()['quote']['body']
     quote_author = response.json()['quote']['author']
     quote, author = update_db(quote_random, quote_author)

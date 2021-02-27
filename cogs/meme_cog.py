@@ -44,7 +44,7 @@ class Meme(commands.Cog):
                 embed.set_footer(text="r/" + meme_page)
                 await message.channel.send(embed=embed)
             else:
-                print("No meme to send. Try after 1 min or the page you are requsting is not available")
+                print("No meme to send. Try after 1 min or the page you are requesting is not available")
 
 
 def setup(client):

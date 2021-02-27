@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-from pymongo import MongoClient
 import random
 from Resources import config
 
@@ -63,7 +62,6 @@ class LevelSys(commands.Cog):
                         roles_list = []
                         for role in role_guild:
                             roles_list.append(role.name)
-                        print(roles_list)
                         newuser = {"user_id": message.author.id, "username": message.author.name,
                                 "server_name": message.guild.name,
                                 "user_roles": roles_list,
@@ -80,12 +78,9 @@ class LevelSys(commands.Cog):
                         levelling.update_one({"user_id": message.author.id},
                                              {"$set": {"current_xp": cur_xp, "xp": xp,
                                                        "level": user_level}})  # update Resources in mongodb database
-                        # print(user_level)
                         if lvl >= user_level:
                             pass
-                            # print(user_level, "level not updated")
                         else:
-                            print(user_level, "inside else")
                             levelling.update_one({"user_id": message.author.id}, {"$set": {"level": user_level}})
                             embed = discord.Embed(
                                 description=f"well done {message.author.mention}! You leveled up to **level: {user_level}**!",
@@ -127,7 +122,6 @@ class LevelSys(commands.Cog):
                         break
                 embed = discord.Embed(title="{}'s level stats".format(ctx.author.name), description=ctx.author.mention,
                                       colour=colour_generator())
-                # embed.add_field(name="Name", value=ctx.author.mention, inline=True)
                 embed.add_field(name="Total_xp", value=f'{total_xp}', inline=True)
                 embed.add_field(name="XP", value=f"{current_xp}/{int(100 * (lvl + 1))}", inline=True)
                 embed.add_field(name="Rank", value=f"{rank}/{ctx.guild.member_count}", inline=True)

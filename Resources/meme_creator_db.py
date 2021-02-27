@@ -1,7 +1,6 @@
-import pymongo
-import praw
 import re
-from cogs import config
+import config
+
 # database setup mongodb
 client_obj = config.Database_oauth()
 client = client_obj.database_info()

@@ -65,8 +65,7 @@ class Fact(commands.Cog):
             else:
                 embed = discord.Embed(
                     title='Invalid Input',
-                    description='Please try command "pls fact" for random fact or type "pls fact number" '
-                                'for random number fact',
+                    description='Please try command "pls help fact" for more information',
                     colour=0xff0000)
                 await message.channel.send(embed=embed)
 

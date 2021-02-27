@@ -15,6 +15,7 @@ event about it than you respond to it.
 discord.py is asynchronous library so things are done with callbacks
 callback is function that is called when something else happen
 '''
+
 TOKEN = 'ODA4Njk1NTQyNTAxNzM2NDc5.YCKSag.ZfYS6EGmD2xHtvN3BwfM9ogjdQE'
 cogs = [levelsys, fact_cog, joke_cog, meme_cog, motivation_cog, help_cog, misc_cog]
 OWNER_IDS = [252353540327079936, 669518518777282561]
@@ -35,20 +36,19 @@ def get_prefix(bot, message):
 
 
 client = commands.Bot(command_prefix=get_prefix, aliases=['PLS ', 'Pls ', 'pLs ', 'plS '],
-                      owner_ids=OWNER_IDS, help_command=None)
+                      owner_ids=OWNER_IDS, help_command=None)  # create client to interact with bot
 
 
 def full_run():
     for i in range(len(cogs)):
         cogs[i].setup(client)
 
-
     @client.command(name='setup')
     @commands.has_permissions(manage_roles=True)
     async def setup(message):  # when member type --setup command
         guild = message.guild
         channel_name = "joke-and-fact"
-        text_channel_list, roles_list = sr.get_server_info(guild.name)
+        text_channel_list, roles_list = sr.get_server_info(guild.name)  # used to get server information
         if channel_name in text_channel_list:
             embed = discord.Embed(
                 title='Failed',
@@ -97,10 +97,6 @@ def full_run():
         for channel in member.server.channels:
             if str(channel) == 'general':
                 await member.server.channel.send(f"""Welcome to the server {member}""")
-
-    @client.event
-    async def on_member_join(self, member):
-        pass
 
     @client.event  # to register an event
     async def on_ready():  # this will call when bot is ready to use
