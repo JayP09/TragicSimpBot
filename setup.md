@@ -62,3 +62,5 @@ self.password = "YOUR REDDIT PASSWORD"
 ```python
 self.ACCESS_KEY_QUOTES = 'YOUR API KEY HERE'
 ``` 
+## THANK YOU :) DONT FORGET  TO GIVE A STAR 🌟 IF YOU LIKED IT
+![](https://media.giphy.com/media/fxI1G5PNC5esyNlIUs/giphy.gif)
