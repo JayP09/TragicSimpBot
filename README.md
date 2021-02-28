@@ -104,13 +104,13 @@ we are using the discord.py library. this discord.py library revolves around the
 
 when you add this bot to your server and you type `pls setup` command then it will create a text channel and certain roles for the leveling system.
 
-# how does fact, joke work ?
-when the user types the command `pls fact` then the tragicsimp bot fetches the facts or joke from API and it creates an embed message then the bot sends that message to the user.
+### how does fact, joke, quote work ?
+when the user types the command `pls fact`or `pls joke`or `pls quote` then the tragicsimp bot fetches the facts or joke from API and it creates an embed message then the bot sends that message to the user.
 
-# how does meme work ?
+### how does meme work ?
 when the user type command `pls meme` then the tragicsimp bot fetches the meme from the MongoDB database and it creates embed message and send it to the user. for a meme, we are using a database because fetching from the API takes some time to return a response as compared to the database. In the database, we are storing the top memes of the week. every week bot deletes old memes and fetches new top memes of the week, adds them to the database. we have programmed the bot in such a way that its probability of repetition of the meme is increasing on every `pls meme` command.
 
-# how does leveling system work ?
+### how does leveling system work ?
 when the user type command for a joke, fact, quote, or meme bot will increase their XP based on that XP bot will calculate the level of the user. when the user will reach levels 5,10,15,20 then the bot will assign a certain role to a user. based on their level and XP user rank is decided.
 
   
@@ -166,8 +166,3 @@ Contributions are what make the open source community such an amazing place to b
 
 
 ## If you liked our work considering giving it a 🌟.
-
-   
-
-  
-  
