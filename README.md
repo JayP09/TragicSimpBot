@@ -1,7 +1,7 @@
-<img src="assets\logo.png" />
+<img src="assets\logo.png" align="center" />
 <br/>
 
-
+<p align="center">
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -27,7 +27,7 @@
 [linkedin-url]: https://www.linkedin.com/in/dhruv-khara-9190ab1aa/
 [linkedin-url-two]: https://www.linkedin.com/in/jay-panchal-12565719a
 [product-screenshot]: images/screenshot.png
-
+</p>
 
 ## Add to your server!
 
@@ -43,7 +43,7 @@ TragicSimp is a discord bot that can send memes, facts, jokes, quotes and track 
 ## Features
 
 ```
-Here are just listed some of the various commands of the bot.
+Here are list of the various commands of the bot.
 ```
 ---
 - **Setup Commands :**
