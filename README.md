@@ -44,8 +44,8 @@ Here are list of the various commands of the bot.
   - `pls setup` - Use this command when you add a bot to your server for first time. This command create text_channel where you can send commands for a meme, fact, quote, joke. This command also create certain roles for levelling system.
   - `pls prefix prefix` - This command change prefix for commands . default prefix is `pls `.
    <br>
-  <img align="center" src="https://github.com/JayP09/discfactbot/blob/main/assets/plssetup.gif" width="350">                           
-  <img align="center" src="https://github.com/JayP09/discfactbot/blob/main/assets/plsprefix.gif" width="315">
+  <img align="center" src="https://github.com/JayP09/discfactbot/blob/main/assets/plssetup.gif" width="400">                           
+  <img align="center" src="https://github.com/JayP09/discfactbot/blob/main/assets/plsprefix.gif" width="365">
 ---
 - **Joke Commands :**
   - `pls joke` - sends a random joke from [JokeAPI](https://v2.jokeapi.dev/).
@@ -57,7 +57,7 @@ Here are list of the various commands of the bot.
   - `pls joke christmas` - sends a christmas joke from JokeAPI
   - `pls joke dadjoke` - sends a random dadjoke from [icanhazdadjoke](https://icanhazdadjoke.com/)
    <br>
-   <p><img align="center" src="https://github.com/JayP09/discfactbot/blob/main/assets/plsjoke.gif" width="300"></p>
+   <p><img align="center" src="https://github.com/JayP09/discfactbot/blob/main/assets/plsjoke.gif" width="400"></p>
  --- 
 - **Facts Commands :**
   - `pls fact` - sends a random fact from [Uselessfacts](https://uselessfacts.jsph.pl/) API.
@@ -71,14 +71,14 @@ Here are list of the various commands of the bot.
   - `pls fact bird` - sends a random Bird fact from Some Random Api
   - `pls fact koala` - sends a random koala fact from Some Random Api
    <br>
-   <img align="center" src="https://github.com/JayP09/discfactbot/blob/main/assets/plsfact.gif" width="300">
+   <img align="center" src="https://github.com/JayP09/discfactbot/blob/main/assets/plsfact.gif" width="400">
  ---
 - **Quotes Commands :**
   - `pls quote` - sends a random Quote from [Favqs](https://favqs.com/).
   - `pls quote category` - sends a random Quote from category list.`categary`=`MOTIVATION`,`inspiration`,`inspire`, `motivational`,`productive`
   - `pls quote qotd` - sends a quote of the Day form Favqs API.
    <br>
-   <img align="center" src="https://github.com/JayP09/discfactbot/blob/main/assets/plsquote.gif" width="300">
+   <img align="center" src="https://github.com/JayP09/discfactbot/blob/main/assets/plsquote.gif" width="400">
 ---
 - **Meme Commands :**
   - `pls meme` - sends a random Meme from a database. In this Database we have collected a top meme of week from [reddit](https://www.reddit.com/dev/api) API
@@ -90,7 +90,7 @@ Here are list of the various commands of the bot.
    <br>
    <img align="center" src="https://github.com/JayP09/discfactbot/blob/main/assets/plsmeme.gif" width="400">
 ---
-- **Levelling System Commands :**
+- **Leveling System Commands :**
   - `pls rank` - sends your rank based on command you have sent in a channel created by Bot.
   - `pls learderboard` - sends a leaderboard of top 10 user in a server with the highest level.
   <br>
@@ -100,6 +100,18 @@ Here are list of the various commands of the bot.
 see full list of documented commands by using the `pls help` command
 
 ## How does it work ?
+we are using the discord.py library. this discord.py library revolves around the concept of the event.event is something you listen to and respond to an event. discord.py is an asynchronous library so things are done with callbacks. the callback is a function that is called when something else happens. For Example: when the user types the command `pls fact` then in discord bot will receive an event about it then the bot responds to it with fact.
+
+when you add this bot to your server and you type `pls setup` command then it will create a text channel and certain roles for the leveling system.
+
+# how does fact, joke work ?
+when the user types the command `pls fact` then the tragicsimp bot fetches the facts or joke from API and it creates an embed message then the bot sends that message to the user.
+
+# how does meme work ?
+when the user type command `pls meme` then the tragicsimp bot fetches the meme from the MongoDB database and it creates embed message and send it to the user. for a meme, we are using a database because fetching from the API takes some time to return a response as compared to the database. In the database, we are storing the top memes of the week. every week bot deletes old memes and fetches new top memes of the week, adds them to the database. we have programmed the bot in such a way that its probability of repetition of the meme is increasing on every `pls meme` command.
+
+# how does leveling system work ?
+when the user type command for a joke, fact, quote, or meme bot will increase their XP based on that XP bot will calculate the level of the user. when the user will reach levels 5,10,15,20 then the bot will assign a certain role to a user. based on their level and XP user rank is decided.
 
   
 ## API Used
@@ -134,7 +146,7 @@ see full list of documented commands by using the `pls help` command
   >This module implements pseudo-random number generators for various distributions.
 
 - **Discord.py :**
-  >A modern, easy to use, feature-rich, and async ready API wrapper for Discord written in Python.
+  >A modern, easy to use, feature-rich, and async ready API wrapper for Discord written in Python.This discord libraryy revolves around the concept of event.
 
 - **Requests :**
   >The requests library is the de facto standard for making HTTP requests in Python
@@ -150,7 +162,7 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (git push origin feature/AmazingFeature)
 5. Open a Pull Request
 
-##Contributors
+## Contributors
 
 
 ## If you liked our work considering giving it a 🌟.
