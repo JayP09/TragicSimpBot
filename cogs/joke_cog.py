@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from discfactbot.Resources import joke as jk
+from Resources import joke as jk
 import random
 
 
@@ -39,6 +39,18 @@ class Joke(commands.Cog):
                 await message.channel.send(embed=embed)
             else:
                 embed = discord.Embed(description="Wrong joke type", colour=0x0000ff)
+                gif_list =['https://media.giphy.com/media/TqiwHbFBaZ4ti/giphy.gif',
+                            'https://media.giphy.com/media/3osxY9kuM2NGUfvThe/giphy.gif',
+                            'https://media.giphy.com/media/YyKPbc5OOTSQE/giphy.gif',
+                            'https://media.giphy.com/media/li0dswKqIZNpm/giphy.gif',
+                            'https://media0.giphy.com/media/ljtfkyTD3PIUZaKWRi/giphy.gif',
+                            'https://media.giphy.com/media/HNEmXQz7A0lDq/giphy.gif',
+                            'https://media.giphy.com/media/4au7PZFkWSjnIsnZXL/giphy.gif',
+                            'https://media1.giphy.com/media/3Z1oSJQpkDZBvJVsUT/giphy.gif',
+                            'https://media.giphy.com/media/vKz8r5aTUFFJu/giphy.gif',
+                            'https://media.giphy.com/media/kEtm4mSTbxvH7j3uCu/giphy.gif',
+                            'https://media.giphy.com/media/bi6RQ5x3tqoSI/giphy.gif']
+                embed.set_image(url = random.choice(gif_list))
                 await message.channel.send(embed=embed)
 
 

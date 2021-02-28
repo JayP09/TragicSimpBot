@@ -1,8 +1,9 @@
+from random import choice
 import discord
 from discord.ext import commands
-from discfactbot.Resources import fact as ft
+from Resources import fact as ft
 import re
-
+import random
 bot_channel = 'joke-and-fact'
 
 
@@ -65,9 +66,21 @@ class Fact(commands.Cog):
             else:
                 embed = discord.Embed(
                     title='Invalid Input',
-                    description='Please try command "pls fact" for random fact or type "pls fact number" '
-                                'for random number fact',
+                    description='Please try command "pls help fact" for more information',
                     colour=0xff0000)
+                gif_list =['https://media.giphy.com/media/TqiwHbFBaZ4ti/giphy.gif',
+                            'https://media.giphy.com/media/3osxY9kuM2NGUfvThe/giphy.gif',
+                            'https://media.giphy.com/media/YyKPbc5OOTSQE/giphy.gif',
+                            'https://media.giphy.com/media/li0dswKqIZNpm/giphy.gif',
+                            'https://media0.giphy.com/media/ljtfkyTD3PIUZaKWRi/giphy.gif',
+                            'https://media.giphy.com/media/HNEmXQz7A0lDq/giphy.gif',
+                            'https://media.giphy.com/media/4au7PZFkWSjnIsnZXL/giphy.gif',
+                            'https://media1.giphy.com/media/3Z1oSJQpkDZBvJVsUT/giphy.gif',
+                            'https://media.giphy.com/media/vKz8r5aTUFFJu/giphy.gif',
+                            'https://media.giphy.com/media/kEtm4mSTbxvH7j3uCu/giphy.gif',
+                            'https://media.giphy.com/media/bi6RQ5x3tqoSI/giphy.gif']
+
+                embed.set_image(url = random.choice(gif_list))
                 await message.channel.send(embed=embed)
 
 
