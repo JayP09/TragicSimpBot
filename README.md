@@ -43,6 +43,9 @@ Here are list of the various commands of the bot.
 - **Setup Commands :**
   - `pls setup` - Use this command when you add a bot to your server for first time. This command create text_channel where you can send commands for a meme, fact, quote, joke. This command also create certain roles for levelling system.
   - `pls prefix prefix` - This command change prefix for commands . default prefix is `pls `.
+   <br>
+  <img align="center" src="https://github.com/JayP09/discfactbot/blob/main/assets/plssetup.gif" width="350">                           
+  <img align="center" src="https://github.com/JayP09/discfactbot/blob/main/assets/plsprefix.gif" width="315">
 ---
 - **Joke Commands :**
   - `pls joke` - sends a random joke from [JokeAPI](https://v2.jokeapi.dev/).
@@ -53,6 +56,8 @@ Here are list of the various commands of the bot.
   - `pls joke spooky` - sends a spooky joke from JokeAPI
   - `pls joke christmas` - sends a christmas joke from JokeAPI
   - `pls joke dadjoke` - sends a random dadjoke from [icanhazdadjoke](https://icanhazdadjoke.com/)
+   <br>
+   <p><img align="center" src="https://github.com/JayP09/discfactbot/blob/main/assets/plsjoke.gif" width="300"></p>
  --- 
 - **Facts Commands :**
   - `pls fact` - sends a random fact from [Uselessfacts](https://uselessfacts.jsph.pl/) API.
@@ -65,11 +70,15 @@ Here are list of the various commands of the bot.
   - `pls fact fox` - sends a random Fox fact from Some Random Api
   - `pls fact bird` - sends a random Bird fact from Some Random Api
   - `pls fact koala` - sends a random koala fact from Some Random Api
+   <br>
+   <img align="center" src="https://github.com/JayP09/discfactbot/blob/main/assets/plsfact.gif" width="300">
  ---
 - **Quotes Commands :**
   - `pls quote` - sends a random Quote from [Favqs](https://favqs.com/).
   - `pls quote category` - sends a random Quote from category list.`categary`=`MOTIVATION`,`inspiration`,`inspire`, `motivational`,`productive`
   - `pls quote qotd` - sends a quote of the Day form Favqs API.
+   <br>
+   <img align="center" src="https://github.com/JayP09/discfactbot/blob/main/assets/plsquote.gif" width="300">
 ---
 - **Meme Commands :**
   - `pls meme` - sends a random Meme from a database. In this Database we have collected a top meme of week from [reddit](https://www.reddit.com/dev/api) API
@@ -78,10 +87,14 @@ Here are list of the various commands of the bot.
                      `2meirl4meirl`,
                      `ComedyCemetery`, `terriblefacebookmemes`
   - `meme pagename` - sends a Meme from user specified page name.
+   <br>
+   <img align="center" src="https://github.com/JayP09/discfactbot/blob/main/assets/plsmeme.gif" width="400">
 ---
 - **Levelling System Commands :**
   - `pls rank` - sends your rank based on command you have sent in a channel created by Bot.
   - `pls learderboard` - sends a leaderboard of top 10 user in a server with the highest level.
+  <br>
+  <img align="center" src="https://github.com/JayP09/discfactbot/blob/main/assets/plsrank.gif" width="400">
 ---
 
 see full list of documented commands by using the `pls help` command
