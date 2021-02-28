@@ -29,16 +29,19 @@
 [product-screenshot]: images/screenshot.png
 
 
-### Add to your server!
+## Add to your server!
+
 [![Uptime Robot status](https://img.shields.io/uptimerobot/status/m779430970-e7fbeac99e0f5b24c277880c.svg)](https://stats.uptimerobot.com/WPBJjHp26) &nbsp;
 [![Uptime Robot ratio](https://img.shields.io/uptimerobot/ratio/m779430970-e7fbeac99e0f5b24c277880c.svg)](https://stats.uptimerobot.com/WPBJjHp26)
 
 <a href="https://discord.com/api/oauth2/authorize?client_id=808695542501736479&permissions=8&scope=bot"><img src="assets/add_to_discord.png" width="300"/></a>
 
-### Description
+## Description
+
 TragicSimp is a discord bot that can send memes, facts, jokes, quotes and track user stats. This bot has levelling system which rank user based on their commands in a channel created by Bot.
 
-### Features
+## Features
+
 ```
 Here are just listed some of the various commands of the bot.
 ```
@@ -89,10 +92,11 @@ Here are just listed some of the various commands of the bot.
 
 see full list of documented commands by using the `pls help` command
 
-### How does it work ?
+## How does it work ?
 
   
-### API Used
+## API Used
+
 - **Joke :**
   - [JokeApi]( https://v2.jokeapi.dev/)
   - [icanhazdadjoke](https://icanhazdadjoke.com/)
@@ -108,7 +112,8 @@ see full list of documented commands by using the `pls help` command
 - **Meme :**
   - [Reddit API]( https://www.reddit.com/dev/api)
   
-### Libraries Used 
+## Libraries Used 
+
 - **pymongo :**
   >PyMongo is a Python distribution containing tools for working with MongoDB, and is the recommended way to work with MongoDB from Python. This documentation attempts to explain everything you need to know to use PyMongo.
 
@@ -128,7 +133,8 @@ see full list of documented commands by using the `pls help` command
   >The requests library is the de facto standard for making HTTP requests in Python
 
   
-### Contributing 
+## Contributing 
+
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are greatly appreciated.
 
 1. Fork the Project
@@ -137,10 +143,10 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (git push origin feature/AmazingFeature)
 5. Open a Pull Request
 
-###Contributors
+##Contributors
 
 
-### If you liked our work considering giving it a 🌟.
+## If you liked our work considering giving it a 🌟.
 
    
 
