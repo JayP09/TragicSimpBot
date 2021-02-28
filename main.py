@@ -16,11 +16,13 @@ discord.py is asynchronous library so things are done with callbacks
 callback is function that is called when something else happen
 '''
 
-TOKEN = 'ODA4Njk1NTQyNTAxNzM2NDc5.YCKSag.ZfYS6EGmD2xHtvN3BwfM9ogjdQE'
 cogs = [levelsys, fact_cog, joke_cog, meme_cog, motivation_cog, help_cog, misc_cog]
-OWNER_IDS = [252353540327079936, 669518518777282561]
+
+
 roles_meme = ['NoobMemer', 'MemeRular', 'MemeStar', 'AlphaMemer']
+
 client_obj = config.Database_oauth()
+TOKEN , OWNER_IDS = client_obj.discord_TOKEN()
 db_client = client_obj.database_info()
 
 
