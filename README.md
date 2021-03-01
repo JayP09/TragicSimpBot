@@ -1,19 +1,19 @@
-<img src="assets\logo.png" align="center" />
+<img src="https://github.com/JayP09/TragicSimpBot/blob/main/assets/logo.png" align="center" />
 <br/>
 
 ---
 
 <p align="center">
-  <a href="https://github.com/JayP09/discfactbot/graphs/contributors">
+  <a href="https://github.com/JayP09/TragicSimpBot/graphs/contributors">
     <img src="https://img.shields.io/github/forks/JayP09/discfactbot?color=%23555&label=Fork&style=for-the-badge" alt="contributors">
   </a>
-  <a href="https://github.com/JayP09/discfactbot/network/members">
-     <img alt="Forks" src="https://img.shields.io/github/forks/JayP09/discfactbot?label=CONTRIBUTORS&style=for-the-badge">
+  <a href="https://github.com/JayP09/TragicSimpBot/network/members">
+     <img alt="Forks" src="https://img.shields.io/github/forks/JayP09/TragicSimpBot?color=red&label=Forks&style=for-the-badge">
   </a>
-  <a href="https://github.com/JayP09/discfactbot/stargazers">
+  <a href="https://github.com/JayP09/TragicSimpBot/stargazers">
     <img alt="Stars" src="https://img.shields.io/github/stars/JayP09/discfactbot?color=Blue&style=for-the-badge">
   </a>
-  <a href="https://github.com/JayP09/discfactbot/blob/main/LICENSE">
+  <a href="https://github.com/JayP09/TragicSimpBot/blob/main/LICENSE">
      <img src="https://img.shields.io/github/license/JayP09/discfactbot?color=green&style=for-the-badge" alt="discord.py">
   </a>
   <a href="https://www.linkedin.com/in/jay-panchal-12565719a">
@@ -168,6 +168,10 @@ Contributions are what make the open source community such an amazing place to b
 
 ---
 ## Contributors
+people who already contributed to TragicSimpBot
+<a href="https://github.com/JayP09/TragicSimpBot/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=JayP09/TragicSimpBot" />
+</a>
 
 ---
 ## If you liked our work considering giving it a 🌟.
