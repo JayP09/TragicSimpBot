@@ -61,5 +61,12 @@ self.password = "YOUR REDDIT PASSWORD"
 ```python
 self.ACCESS_KEY_QUOTES = 'YOUR API KEY HERE'
 ``` 
+---
+## Set up your own Reddit Meme Pages 
+
+1. From Resources open meme_creator_db.py 
+2. Add your own favorite meme pages in page_list using ```['funny', 'your meme page here']```  
+3. You are Done!
+---
 ## THANK YOU :) DONT FORGET  TO GIVE A STAR 🌟 IF YOU LIKED IT
 ![](https://media.giphy.com/media/fxI1G5PNC5esyNlIUs/giphy.gif)
