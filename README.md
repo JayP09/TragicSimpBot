@@ -35,7 +35,7 @@
 ---
 ## Description
 
-#### TragicSimp is a discord bot that can send memes, facts, jokes, quotes and track user stats. This bot has levelling system which rank user based on their commands in a channel created by Bot.
+#### TragicSimp is a discord bot that can send memes, facts, jokes, quotes and track user stats. This bot has leveling system which rank user based on their commands in a channel created by Bot.
 
 ---
 
