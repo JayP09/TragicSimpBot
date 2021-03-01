@@ -14,6 +14,7 @@ reddit = client_obj.oauth_info()
 
 def meme_file_creator():
     collection.drop()
+    #add your own pages here
     page_list = ['funny', 'dankmemes', 'memes', 'teenagers', 'Chodi', "DsyncTV", 'cursedcomments', 'holdup',
                 'SaimanSays/', 'wholesomememes', 'IndianMeyMeys', 'indiameme', 'desimemes', 'Tinder', '2meirl4meirl',
                 'ComedyCemetery', 'terriblefacebookmemes']
