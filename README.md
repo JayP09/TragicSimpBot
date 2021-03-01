@@ -4,9 +4,7 @@
 ---
 
 <p align="center">
-  <a href="https://github.com/JayP09/TragicSimpBot/graphs/contributors?from=2021-01-31&to=2021-03-01&type=c">
-    <img src="https://img.shields.io/github/forks/JayP09/TragicSimpBot?color=blue&label=contributors&style=for-the-badge" alt="contributors">
-  </a>
+ 
   <a href="https://github.com/JayP09/TragicSimpBot/network/members">
      <img alt="Forks" src="https://img.shields.io/github/forks/JayP09/TragicSimpBot?color=red&label=Forks&style=for-the-badge">
   </a>
