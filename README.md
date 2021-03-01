@@ -5,7 +5,7 @@
 
 <p align="center">
   <a href="https://github.com/JayP09/TragicSimpBot/graphs/contributors">
-    <img src="https://img.shields.io/github/forks/JayP09/discfactbot?color=%23555&label=Fork&style=for-the-badge" alt="contributors">
+    <img src="https://img.shields.io/github/forks/JayP09/TragicSimpBot?color=blue&label=contributors&style=for-the-badge" alt="contributors">
   </a>
   <a href="https://github.com/JayP09/TragicSimpBot/network/members">
      <img alt="Forks" src="https://img.shields.io/github/forks/JayP09/TragicSimpBot?color=red&label=Forks&style=for-the-badge">
