@@ -39,7 +39,7 @@
 
 ---
 
-##Setup your own bot and database
+## Setup your own bot and database
 Read [setup.md](https://github.com/JayP09/discfactbot/blob/main/setup.md) for more information! 
 
 ---
