@@ -2,7 +2,6 @@
 
 TragicSimp is a discord bot that can send memes, facts, jokes, quotes and track user stats
 
-
 ## Installation
 
 Download this project 
