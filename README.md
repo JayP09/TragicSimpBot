@@ -25,15 +25,15 @@
 ---
 ## Add to your server!
 
-[![Uptime Robot status](https://img.shields.io/uptimerobot/status/m779430970-e7fbeac99e0f5b24c277880c.svg)](https://stats.uptimerobot.com/WPBJjHp26) &nbsp;
-[![Uptime Robot ratio](https://img.shields.io/uptimerobot/ratio/m779430970-e7fbeac99e0f5b24c277880c.svg)](https://stats.uptimerobot.com/WPBJjHp26)
+![Uptime Robot status](https://shields.api-test.nl/uptimerobot/status/m787381889-4be87e95e012477f82cec3c6?style=for-the-badge)
+![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/m787381889-4be87e95e012477f82cec3c6?style=for-the-badge)
 
 <a href="https://discord.com/api/oauth2/authorize?client_id=808695542501736479&permissions=8&scope=bot"><img src="assets/add_to_discord.png" width="300"/></a>
 
 ---
 ## Description
 
-#### TragicSimp is a discord bot that can send memes, facts, jokes, quotes and track user stats. This bot has leveling system which rank user based on their commands in a channel created by Bot.
+#### TragicSimp is a discord bot that can send memes, facts, jokes, quotes and track user stats. This bot has leveling system which rank user based on their commands in a channel created by Bot. This bot can run on Multiple Server.
 
 ---
 
