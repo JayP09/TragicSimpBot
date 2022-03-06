@@ -1,3 +1,5 @@
+import subprocess
+subprocess.call(['pip', 'install', 'dnspython'])
 import discord
 from discord.ext import commands
 from Resources import server as sr
@@ -6,8 +8,7 @@ from Resources import config
 from discord.ext.commands import when_mentioned_or
 import random
 from cogs import levelsys, fact_cog, joke_cog, meme_cog, motivation_cog, help_cog, misc_cog
-import subprocess
-subprocess.call(['pip', 'install', 'dnspython'])
+
 
 '''
 this discord library revolves around the concept of event.
